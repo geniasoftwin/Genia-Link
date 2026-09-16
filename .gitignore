@@ -1,0 +1,71 @@
+# Build output
+**/bin/
+**/obj/
+**/artifacts/
+**/publish/
+**/out/
+**/dist/
+**/build/
+
+# IDE / user state
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+_ReSharper*/
+*.DotSettings.user
+
+# OS noise
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# .NET / NuGet
+packages/
+*.nupkg
+*.snupkg
+TestResults/
+coverage/
+coverage.*
+*.trx
+
+# Android / Gradle / local machine state
+.gradle/
+local.properties
+keystore.properties
+signing.properties
+*.apk
+*.aab
+
+# Secrets / credentials / signing material
+.env
+.env.*
+!.env.example
+*.pfx
+*.p12
+*.jks
+*.keystore
+*.key
+*.pem
+*.snk
+*.kdbx
+*.secrets.json
+secrets.json
+credentials.json
+
+# Temporary / logs
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+*.swo
+
+# Local Genia Link data
+GeniaLinkData/
+trusted-devices*.json
+identity*.json
+settings.local*.json
