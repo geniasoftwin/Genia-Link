@@ -1,0 +1,38 @@
+name: Genia Link CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  security-and-self-tests:
+    name: Build, analyzers and self-tests
+    runs-on: windows-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+
+      - name: Show .NET environment
+        shell: pwsh
+        run: dotnet --info
+
+      - name: Run Genia Link security checks
+        shell: pwsh
+        run: ./scripts/SecurityCheck.ps1
