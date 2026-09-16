@@ -1,0 +1,20 @@
+[
+  {
+    "Name": "Genia Link Windows",
+    "Projects": [
+      {
+        "Path": "src\\GeniaLink.Windows\\GeniaLink.Windows.csproj",
+        "Action": "Start"
+      }
+    ]
+  },
+  {
+    "Name": "Genia Link Android",
+    "Projects": [
+      {
+        "Path": "src\\GeniaLink.Android\\GeniaLink.Android.csproj",
+        "Action": "Start"
+      }
+    ]
+  }
+]

@@ -64,8 +64,13 @@ credentials.json
 *.swp
 *.swo
 
-# Local Genia Link data
+# Local Genia Link runtime/trust data
 GeniaLinkData/
 trusted-devices*.json
+trusted-identities*.json
 identity*.json
+identity-assertion-revision*.json
+capability-assertion-revision*.json
+rotate-signing-key.request.json
 settings.local*.json
+.genialink-resume/

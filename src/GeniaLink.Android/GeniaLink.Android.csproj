@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <Version>0.3.1</Version>
+    <AssemblyVersion>0.3.1.0</AssemblyVersion>
+    <FileVersion>0.3.1.0</FileVersion>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net10.0-android</TargetFramework>
+    <SupportedOSPlatformVersion>31.0</SupportedOSPlatformVersion>
+    <RootNamespace>GeniaLink.Android</RootNamespace>
+    <AssemblyName>GeniaLink.Android</AssemblyName>
+    <ApplicationId>com.geniapixia.genialink</ApplicationId>
+    <ApplicationVersion>15</ApplicationVersion>
+    <ApplicationDisplayVersion>0.3.1-rc4</ApplicationDisplayVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeniaLink.Core\GeniaLink.Core.csproj" />
+  </ItemGroup>
+</Project>

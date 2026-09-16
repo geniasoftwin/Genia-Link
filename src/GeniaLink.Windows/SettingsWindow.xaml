@@ -1,0 +1,193 @@
+<Window x:Class="GeniaLink.Windows.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Настройки Genia Link" Icon="Assets/GeniaLink.ico" Height="650" Width="860" MinHeight="560" MinWidth="760"
+        WindowStartupLocation="CenterOwner" ResizeMode="CanResize">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Padding" Value="14,7"/>
+            <Setter Property="MinHeight" Value="34"/>
+        </Style>
+        <Style TargetType="CheckBox">
+            <Setter Property="Margin" Value="0,7,0,7"/>
+            <Setter Property="FontSize" Value="14"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0" Margin="0,0,0,16">
+            <TextBlock Text="Настройки" FontSize="26" FontWeight="SemiBold"/>
+            <TextBlock Text="Системные интеграции, доверенные устройства и параметры локальной работы." Opacity="0.65" Margin="0,4,0,0"/>
+        </StackPanel>
+
+        <TabControl Grid.Row="1">
+            <TabItem Header="Общие">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Запуск и уведомления" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <CheckBox x:Name="StartWithWindowsCheckBox" Content="Запускать Genia Link вместе с Windows"/>
+                    <CheckBox x:Name="StartMinimizedCheckBox" Content="При автозапуске сразу сворачивать в трей"/>
+                    <CheckBox x:Name="ShowNotificationsCheckBox" Content="Показывать системные уведомления о передаче и состоянии"/>
+                    <Border BorderBrush="#22000000" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,16,0,0">
+                        <TextBlock TextWrapping="Wrap" Opacity="0.72"
+                                   Text="Автозагрузка создаётся только для текущего пользователя Windows (HKCU), не требует прав администратора и удаляется этой же настройкой."/>
+                    </Border>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Роль и функции">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="Роль устройства в Genia Network" FontSize="18" FontWeight="SemiBold"/>
+                        <TextBlock TextWrapping="Wrap" Opacity="0.68" Margin="0,6,0,12"
+                                   Text="Выберите готовый профиль или измените набор функций вручную. Genia Network автоматически распознает профиль по точному набору capabilities; нестандартная комбинация станет Пользовательской."/>
+                        <ComboBox x:Name="DeviceRoleComboBox" Width="310" HorizontalAlignment="Left" SelectionChanged="DeviceRoleComboBox_SelectionChanged">
+                            <ComboBoxItem Content="Обычное устройство (Client)" Tag="Client"/>
+                            <ComboBoxItem Content="Сервер Genia Network" Tag="Server"/>
+                            <ComboBoxItem Content="Relay node" Tag="Relay"/>
+                            <ComboBoxItem Content="Backup node" Tag="Backup"/>
+                            <ComboBoxItem Content="Пользовательский профиль" Tag="Custom"/>
+                        </ComboBox>
+
+                        <TextBlock Text="Capabilities" FontSize="18" FontWeight="SemiBold" Margin="0,20,0,8"/>
+                        <CheckBox x:Name="TrustedDiscoveryCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Trusted Discovery — authenticated discovery устройств"/>
+                        <CheckBox x:Name="TrustedTransportCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Trusted Transport — защищённые GNP/1-сессии"/>
+                        <CheckBox x:Name="FileTransferCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="File Transfer — передача файлов"/>
+                        <CheckBox x:Name="SharedResourcesCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Shared Resources — публикация разрешённых ресурсов"/>
+                        <CheckBox x:Name="BackgroundAvailabilityCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Background Availability — постоянная доступность узла"/>
+                        <CheckBox x:Name="NetworkEventsCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Network Events — события Genia Network (профиль для следующего этапа)"/>
+                        <CheckBox x:Name="SyncCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Genia Sync — синхронизация управляемых ресурсов (профиль для следующего этапа)"/>
+                        <CheckBox x:Name="RelayCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Relay — ретрансляция Genia Network (профиль для следующего этапа)"/>
+                        <CheckBox x:Name="BackupCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Backup — узел резервного копирования (профиль для следующего этапа)"/>
+                        <CheckBox x:Name="PrinterGatewayCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Printer Gateway — шлюз печати (зарезервировано)"/>
+                        <CheckBox x:Name="MessagingCapabilityCheckBox" Checked="CapabilityCheckBox_Changed" Unchecked="CapabilityCheckBox_Changed" Content="Messaging — сообщения Genia Network (зарезервировано)"/>
+
+                        <Border BorderBrush="#22000000" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,14,0,0">
+                            <TextBlock x:Name="RoleCapabilityExplanationTextBlock" TextWrapping="Wrap" Opacity="0.72"/>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+
+            <TabItem Header="Передача">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Папка Genia Link" FontSize="18" FontWeight="SemiBold"/>
+                    <TextBlock TextWrapping="Wrap" Opacity="0.68" Margin="0,6,0,12"
+                               Text="Сюда сохраняются полученные файлы и служебные данные докачки Windows. Папку можно разместить на другом локальном диске."/>
+                    <TextBox x:Name="ReceiveFolderTextBox" IsReadOnly="True" TextWrapping="Wrap" MinHeight="38"/>
+                    <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                        <Button Content="Выбрать папку…" Width="135" Click="ChooseReceiveFolderButton_Click"/>
+                        <Button Content="По умолчанию" Width="125" Margin="8,0,0,0" Click="DefaultReceiveFolderButton_Click"/>
+                    </StackPanel>
+                    <Border BorderBrush="#22000000" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,18,0,0">
+                        <StackPanel>
+                            <TextBlock TextWrapping="Wrap" Opacity="0.72"
+                                       Text="По умолчанию: Загрузки\Genia Link. Из соображений безопасности нельзя выбрать корень диска, системные каталоги Windows, junction/symlink или сетевой UNC-путь."/>
+                            <TextBlock TextWrapping="Wrap" Opacity="0.72" Margin="0,8,0,0"
+                                       Text="Незавершённые передачи Windows хранятся в скрытой .genialink-resume внутри выбранной папки и проверяются перед докачкой. При смене папки старые файлы автоматически не перемещаются."/>
+                            <TextBlock TextWrapping="Wrap" Opacity="0.72" Margin="0,8,0,0"
+                                       Text="Только содержимое этой папки Genia Link может быть показано сопряжённому доверенному устройству по кнопке «Файлы Genia Link». Другие папки и диски удалённо не публикуются."/>
+                            <TextBlock TextWrapping="Wrap" Opacity="0.72" Margin="0,8,0,0"
+                                       Text="Genia Link сам не использует облако. Если вручную выбрать папку, которую синхронизирует OneDrive/Dropbox/другая программа, дальнейшая синхронизация выполняется уже этим внешним ПО."/>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Интеграция Windows">
+                <StackPanel Margin="20">
+                    <TextBlock Text="Меню «Отправить»" FontSize="18" FontWeight="SemiBold"/>
+                    <CheckBox x:Name="EnableSendToCheckBox" Margin="0,14,0,6"
+                              Content="Автоматически показывать онлайн-доверенные устройства в «ПКМ → Отправить»"/>
+                    <TextBlock TextWrapping="Wrap" Opacity="0.68"
+                               Text="Genia Link создаёт ярлыки только для доверенных устройств, которые сейчас обнаружены в локальной сети. При закрытии приложения ярлыки удаляются, чтобы не оставлять неработающие пункты."/>
+                    <StackPanel Orientation="Horizontal" Margin="0,18,0,0">
+                        <Button Content="Обновить сейчас" Width="140" Click="RefreshSendToButton_Click"/>
+                        <Button Content="Удалить из меню" Width="145" Margin="8,0,0,0" Click="RemoveSendToButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Устройства">
+                <Grid Margin="16">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Сопряжённые устройства" FontSize="18" FontWeight="SemiBold" Margin="0,0,0,10"/>
+                    <DataGrid x:Name="TrustedDevicesDataGrid" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                              SelectionMode="Single" CanUserAddRows="False" CanUserDeleteRows="False"
+                              SelectionChanged="TrustedDevicesDataGrid_SelectionChanged"
+                              HeadersVisibility="Column" GridLinesVisibility="Horizontal">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Устройство" Binding="{Binding DeviceName}" Width="2*"/>
+                            <DataGridTextColumn Header="Тип" Binding="{Binding DeviceKindText}" Width="1.4*"/>
+                            <DataGridTextColumn Header="Состояние" Binding="{Binding Status}" Width="1.2*"/>
+                            <DataGridTextColumn Header="Trust lifecycle" Binding="{Binding LifecycleText}" Width="1.1*"/>
+                            <DataGridTextColumn Header="Сопряжено" Binding="{Binding PairedAtText}" Width="1.4*"/>
+                            <DataGridTextColumn Header="Fingerprint" Binding="{Binding Fingerprint}" Width="2.2*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                    <Grid Grid.Row="2" Margin="0,12,0,0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Opacity="0.65" TextWrapping="Wrap"
+                                   Text="Retired сохраняет identity и позволяет безопасно вернуть устройство в Active. Revoked блокирует trust и не может быть автоматически восстановлен."/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                            <Button x:Name="RetireReactivateButton" Content="Перевести в Retired" MinWidth="145" Margin="0,0,8,0"
+                                    Click="RetireReactivateButton_Click"/>
+                            <Button x:Name="RevokeButton" Content="Revoke trust" MinWidth="120" Margin="0,0,8,0"
+                                    Click="RevokeButton_Click"/>
+                            <Button Content="Забыть выбранное" Width="145" Click="ForgetSelectedButton_Click"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </TabItem>
+
+            <TabItem Header="Безопасность и о программе">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel Margin="20">
+                        <TextBlock Text="Genia Link v0.3.1 RC4" FontSize="20" FontWeight="SemiBold"/>
+                        <TextBlock Text="Protocol v3 · полностью локальная передача" Margin="0,4,0,16" Opacity="0.7"/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,8"
+                                   Text="• Передача и discovery работают только в локальной сети. Облако, аккаунт, телеметрия и внешние API не используются."/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,8"
+                                   Text="• Доверие основано на ECDH P-256 и ручной сверке SAS-кода. Приватный ключ Windows хранится через CNG."/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,8"
+                                   Text="• Переданные файлы проверяются SHA-256; resume проверяет уже полученный префикс перед продолжением."/>
+                        <TextBlock TextWrapping="Wrap" Margin="0,0,0,16"
+                                   Text="• Локальный IPC ограничен текущим пользователем; системные интеграции не требуют прав администратора."/>
+                        <TextBlock Text="Fingerprint этого компьютера" FontWeight="SemiBold"/>
+                        <TextBox x:Name="LocalFingerprintTextBox" IsReadOnly="True" FontFamily="Consolas"
+                                 TextWrapping="Wrap" Margin="0,6,0,0" Padding="8"/>
+                        <Button Content="Скопировать сведения" Width="160" Margin="0,12,0,0" HorizontalAlignment="Left"
+                                Click="CopyInfoButton_Click"/>
+                        <Border BorderBrush="#22000000" BorderThickness="1" CornerRadius="8" Padding="12" Margin="0,18,0,0">
+                            <StackPanel>
+                                <TextBlock Text="GNP/1 Trusted Key Rotation" FontWeight="SemiBold"/>
+                                <TextBlock x:Name="SigningIdentityTextBlock" TextWrapping="Wrap" FontFamily="Consolas" Opacity="0.72" Margin="0,6,0,0"/>
+                                <TextBlock TextWrapping="Wrap" Opacity="0.70" Margin="0,8,0,0"
+                                           Text="Смена signing key выполняется только на следующем чистом запуске. Старый ключ подписывает новый, поэтому обновлённые доверенные устройства сохраняют доверие без нового SAS-сопряжения."/>
+                                <Button Content="Запланировать смену signing key…" MinWidth="225" Margin="0,10,0,0" HorizontalAlignment="Left"
+                                        Click="RotateSigningKeyButton_Click"/>
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Отмена" Width="100" IsCancel="True"/>
+            <Button Content="Сохранить" Width="110" Margin="8,0,0,0" IsDefault="True" Click="SaveButton_Click"/>
+        </StackPanel>
+    </Grid>
+</Window>

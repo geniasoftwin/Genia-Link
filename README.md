@@ -2,59 +2,76 @@
 
 **English** · [Русский](README.ru.md)
 
-Genia Link is a local-network device link for trusted file exchange between Windows and Android devices. The core transfer path is designed to work directly over the LAN without a cloud relay.
+Genia Link is a local-first device link for trusted file exchange between Windows and Android devices. The current public source snapshot is **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**.
 
-> **Status:** development preview. The current development line is **v0.3.1 RC4 / GNP/1 M2.6.x**. Interfaces, protocol details, packaging, and compatibility requirements may change before a stable release.
+> **Development status:** release-candidate / protocol-development checkpoint. Interfaces, packaging, and GNP/1 details may change before a stable release.
 
-## What Genia Link is designed to provide
+## Highlights
 
-- local device discovery on the LAN;
-- explicit trusted pairing with verification;
-- authenticated and encrypted file transfer between trusted devices;
-- transfer resume for interrupted files;
-- protected browsing/requesting of files exposed through the Genia Link folder workflow;
-- trusted-device identity tracking and protection against silent identity replacement;
-- replay/tamper checks for authenticated discovery data;
-- safe destination/path handling for received files;
-- Windows integration such as **Send to** workflows;
-- Windows and Android clients built around a shared protocol/core.
+- Direct device-to-device transfer on the local IPv4 network.
+- Automatic local discovery; no manual IP entry for normal use.
+- Explicit SAS pairing and persistent trusted device identity.
+- ECDH P-256 key agreement with per-session keys.
+- AES-256-GCM protected transfer frames.
+- SHA-256 file verification and resumable partial transfers.
+- Trusted Identity Registry with authenticated signing-key binding and continuity-verified key rotation.
+- Replay-hardened signed identity assertions.
+- Local lifecycle states for trusted identities: Active, Retired, and Revoked.
+- GNP/1 M2.6.2 authenticated device capability advertisements.
+- Windows and Android clients sharing the protocol/core implementation.
+- Android optional **Always Ready** mode for long-idle availability.
+- No third-party NuGet `PackageReference` dependencies in this source snapshot.
 
-## Security model
+## Local-only networking model
 
-Genia Link treats device identity and pairing state as security boundaries. A previously trusted device is not supposed to become trusted again merely because another endpoint appears under the same display name. Identity/key changes require a new explicit trust decision.
+Genia Link is designed to transfer user files directly between trusted devices on the local network. The application source does not use HTTP clients, cloud relay APIs, analytics SDKs, advertising SDKs, or external application servers for the transfer path.
 
-The project also uses defensive checks around transfer paths, authenticated discovery/control messages, replay handling, and trusted peer state. Security-sensitive behavior is covered by automated self-tests in the development package.
+Inbound TCP listeners may bind to local interfaces, but accepted peers are restricted by `LocalNetworkPolicy` to IPv4 loopback/private/link-local/shared-local ranges. Trust-sensitive actions additionally require the Genia Link pairing/session authentication model.
 
-## Privacy and networking
+Android declares the platform `INTERNET` permission because Android requires it for TCP/UDP networking; this does not imply that Genia Link uses an Internet service.
 
-Genia Link is intended for direct communication between devices on a local network. The transfer design does not require a Genia Link cloud service to relay user files.
+## Repository layout
 
-Operating systems, package managers, GitHub, certificate infrastructure, or future optional features may still use Internet connectivity independently of the Genia Link transfer protocol.
+```text
+src/
+  GeniaLink.Core/       Shared protocol, crypto/session, identity and transfer logic
+  GeniaLink.Windows/    Windows WPF client
+  GeniaLink.Android/    Android client
+  GeniaLink.SelfTest/   Offline self-tests
+scripts/                Build, publish, install and security-check scripts
+docs/                   Protocol, milestone and security documentation
+branding/               Project artwork and branding notes
+```
 
-## Platforms
+## Build prerequisites
 
-Current development targets include:
+The projects target **.NET 10**. Windows builds require the Windows desktop tooling; Android builds require the .NET for Android workload.
 
-- **Windows** — .NET desktop client;
-- **Android** — .NET for Android client.
+For the exact current development workflow and RC4 test notes, see:
 
-Exact OS/runtime requirements will be documented with public release packages.
+- [Development notes (Russian)](docs/DEVELOPMENT_NOTES_RU.md)
+- [Protocol notes](docs/PROTOCOL.md)
+- [GNP/1 M2.6.2 checkpoint](docs/GNP1_MILESTONE2_6_2_AUTHENTICATED_CAPABILITIES.md)
+- [RC4 final test checklist](docs/RC4_FINAL_TEST.md)
+- [Security implementation notes](docs/SECURITY_IMPLEMENTATION.md)
 
-## Repository scope
+## Security
 
-This repository is being prepared as the public home of Genia Link. Public source, documentation, test material, and release artifacts may be added incrementally.
+Security-sensitive code includes pairing, trusted-session authentication, device/signing identity, key rotation, discovery authenticity/replay handling, transfer framing, resume state, and path confinement.
 
-Sensitive material such as signing keys, certificates, private keys, credentials, local machine configuration, and private infrastructure data must never be committed.
+The development package includes offline self-tests and PowerShell security checks. Before publishing a release build, run the project security checks on the intended Windows/.NET/Android toolchain.
+
+To report a vulnerability, see [SECURITY.md](SECURITY.md). Do not post private keys, credentials, real device identifiers, or exploit details in a public issue.
+
+## Privacy
+
+Genia Link does not require a Genia Link account or cloud relay for file transfer. Operating systems, package managers, GitHub, certificate infrastructure, or future optional features may independently use Internet connectivity outside the Genia Link transfer protocol.
 
 ## License and rights
 
-No open-source license is granted by the mere publication of this repository. Unless a file or component explicitly states otherwise, the project content is **All Rights Reserved**. Third-party components remain subject to their own licenses and notices.
+This repository is **source-available for inspection but is not released under an open-source license**. Unless a file or third-party component explicitly states otherwise, project-owned material is All Rights Reserved.
 
 See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md).
-
-## Security reporting
-
-Please read [SECURITY.md](SECURITY.md) before reporting a potential vulnerability.
 
 ---
 
