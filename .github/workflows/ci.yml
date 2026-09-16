@@ -24,11 +24,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Preserve committed line endings
+      - name: Preserve compatibility baseline bytes
         shell: pwsh
         run: |
-          git config core.autocrlf false
-          git checkout-index -a -f
+          $paths = @(
+            'src/GeniaLink.Core/Discovery/DiscoveryPacket.cs',
+            'src/GeniaLink.Core/Pairing/PairingProtocol.cs',
+            'src/GeniaLink.Core/Network/TrustedSessionHandshake.cs',
+            'src/GeniaLink.Core/Network/TransferProtocol.cs'
+          )
+
+          foreach ($path in $paths) {
+            [byte[]]$bytes = [System.IO.File]::ReadAllBytes($path)
+            $normalized = [System.Collections.Generic.List[byte]]::new($bytes.Length)
+            for ($i = 0; $i -lt $bytes.Length; $i++) {
+              if ($bytes[$i] -eq 13 -and ($i + 1) -lt $bytes.Length -and $bytes[$i + 1] -eq 10) {
+                $normalized.Add([byte]10)
+                $i++
+              }
+              else {
+                $normalized.Add($bytes[$i])
+              }
+            }
+            [System.IO.File]::WriteAllBytes($path, $normalized.ToArray())
+          }
 
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
