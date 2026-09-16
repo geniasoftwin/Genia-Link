@@ -55,6 +55,10 @@ For the exact current development workflow and RC4 test notes, see:
 - [RC4 final test checklist](docs/RC4_FINAL_TEST.md)
 - [Security implementation notes](docs/SECURITY_IMPLEMENTATION.md)
 
+## Releases and changelog
+
+Public source snapshot notes are tracked in [CHANGELOG.md](CHANGELOG.md). The current RC4/M2.6.2 snapshot is a pre-release source checkpoint; no release binaries are bundled in the repository.
+
 ## Security
 
 Security-sensitive code includes pairing, trusted-session authentication, device/signing identity, key rotation, discovery authenticity/replay handling, transfer framing, resume state, and path confinement.
