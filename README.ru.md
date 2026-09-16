@@ -6,6 +6,10 @@
 
 <p align="center"><a href="README.md">English</a> · <strong>Русский</strong></p>
 
+<p align="center">
+  <a href="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml"><img src="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml/badge.svg?branch=main" alt="Genia Link CI" /></a>
+</p>
+
 Genia Link — локальная система связи между доверенными устройствами для прямого обмена файлами между Windows и Android. Текущий публичный снимок исходного кода: **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**.
 
 > **Статус разработки:** release candidate / промежуточный этап развития протокола. До стабильного релиза интерфейсы, упаковка и детали GNP/1 могут изменяться.
