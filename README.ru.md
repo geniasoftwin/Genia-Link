@@ -55,6 +55,10 @@ branding/               Графика и заметки по брендингу
 - [Финальный RC4 regression-чеклист](docs/RC4_FINAL_TEST.md)
 - [Технические заметки по безопасности](docs/SECURITY_IMPLEMENTATION.md)
 
+## Релизы и changelog
+
+Заметки о публичных снимках исходного кода ведутся в [CHANGELOG.md](CHANGELOG.md). Текущий RC4/M2.6.2 — предварительный снимок исходников; готовые бинарные релизы в сам репозиторий не включены.
+
 ## Безопасность
 
 К security-sensitive частям относятся pairing, trusted-session authentication, device/signing identity, смена signing key, подлинность/replay-защита discovery, transfer framing, resume state и ограничение файловых путей.
