@@ -24,6 +24,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Preserve committed line endings
+        shell: pwsh
+        run: |
+          git config core.autocrlf false
+          git checkout-index -a -f
+
       - name: Setup .NET 10
         uses: actions/setup-dotnet@v4
         with:
