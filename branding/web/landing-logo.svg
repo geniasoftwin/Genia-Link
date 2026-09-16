@@ -1,0 +1,7 @@
+<svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
+<defs><linearGradient id="a" x1="20" y1="20" x2="108" y2="108" gradientUnits="userSpaceOnUse"><stop stop-color="#21DFFF"/><stop offset="1" stop-color="#6F7EFF"/></linearGradient><filter id="g" x="-30" y="-30" width="188" height="188" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="6"/></filter></defs>
+<path opacity=".35" filter="url(#g)" d="M43 47C48 38 57 33 67 33H75C90 33 102 45 102 60C102 75 90 87 75 87H67" stroke="#2EDCFF" stroke-width="12" stroke-linecap="round"/>
+<path d="M43 47C48 38 57 33 67 33H75C90 33 102 45 102 60C102 75 90 87 75 87H67" stroke="url(#a)" stroke-width="10" stroke-linecap="round"/>
+<path d="M85 81C80 90 71 95 61 95H53C38 95 26 83 26 68C26 53 38 41 53 41H61" stroke="url(#a)" stroke-width="10" stroke-linecap="round"/>
+<path d="M50 64H78" stroke="url(#a)" stroke-width="10" stroke-linecap="round"/>
+</svg>

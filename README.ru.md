@@ -1,6 +1,10 @@
 # Genia Link
 
-[English](README.md) · **Русский**
+<p align="center">
+  <img src="branding/web/readme-hero.svg" alt="Genia Link — доверенная локальная сеть между Windows и Android" width="100%" />
+</p>
+
+<p align="center"><a href="README.md">English</a> · <strong>Русский</strong></p>
 
 Genia Link — локальная система связи между доверенными устройствами для прямого обмена файлами между Windows и Android. Текущий публичный снимок исходного кода: **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**.
 

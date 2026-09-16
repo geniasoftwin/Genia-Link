@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="520" viewBox="0 0 1600 520">
+<defs>
+  <radialGradient id="bg" cx="50%" cy="-10%" r="95%"><stop offset="0" stop-color="#102949"/><stop offset=".30" stop-color="#07111f"/><stop offset=".70" stop-color="#050a12"/></radialGradient>
+  <linearGradient id="accent" x1="0" x2="1"><stop offset="0" stop-color="#19d7ff"/><stop offset="1" stop-color="#6483ff"/></linearGradient>
+  <radialGradient id="halo"><stop offset="0" stop-color="#19d7ff" stop-opacity=".18"/><stop offset=".48" stop-color="#19d7ff" stop-opacity=".05"/><stop offset="1" stop-color="#19d7ff" stop-opacity="0"/></radialGradient>
+  <filter id="softGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="16"/></filter>
+  <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".026" stroke-width="1"/></pattern>
+  <linearGradient id="logoGradient" x1="20" y1="20" x2="108" y2="108" gradientUnits="userSpaceOnUse"><stop stop-color="#21DFFF"/><stop offset="1" stop-color="#6F7EFF"/></linearGradient>
+  <filter id="logoGlow" x="-30" y="-30" width="188" height="188" filterUnits="userSpaceOnUse"><feGaussianBlur stdDeviation="6"/></filter>
+</defs>
+<rect width="1600" height="520" fill="url(#bg)"/><rect width="1600" height="520" fill="url(#grid)"/>
+<text x="120" y="99" fill="#7be8ff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="14" font-weight="800" letter-spacing="3">YOUR DEVICES. ONE TRUSTED NETWORK.</text>
+<text x="120" y="203" fill="#eef7ff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="62" font-weight="800" letter-spacing="-2">Genia Link</text>
+<text x="120" y="270" fill="url(#accent)" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="40" font-weight="800">Trusted local network</text>
+<text x="120" y="354" fill="#91a6ba" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="20" font-weight="500">Direct file exchange between Windows and Android</text>
+<g font-family="Inter,Segoe UI,Arial,sans-serif" font-size="12" fill="#a9c4d7">
+<rect x="120" y="398" width="96" height="29" rx="15" fill="#fff" fill-opacity=".025" stroke="#82bceb" stroke-opacity=".18"/><text x="168" y="416" text-anchor="middle">Windows</text>
+<rect x="228" y="398" width="96" height="29" rx="15" fill="#fff" fill-opacity=".025" stroke="#82bceb" stroke-opacity=".18"/><text x="276" y="416" text-anchor="middle">Android</text>
+<rect x="336" y="398" width="125" height="29" rx="15" fill="#fff" fill-opacity=".025" stroke="#82bceb" stroke-opacity=".18"/><text x="398.5" y="416" text-anchor="middle">Local-first</text>
+<rect x="473" y="398" width="154" height="29" rx="15" fill="#fff" fill-opacity=".025" stroke="#82bceb" stroke-opacity=".18"/><text x="550" y="416" text-anchor="middle">Direct transfer</text>
+</g>
+<rect x="960" y="42" width="544" height="437" rx="27" fill="#0a1728" fill-opacity=".78" stroke="#78c4ff" stroke-opacity=".15"/>
+<circle cx="1232" cy="260" r="149" fill="none" stroke="#57c7ff" stroke-opacity=".15"/><circle cx="1232" cy="260" r="210" fill="none" stroke="#57c7ff" stroke-opacity=".09"/><circle cx="1232" cy="260" r="83" fill="#19d7ff" fill-opacity=".10" filter="url(#softGlow)"/>
+<path d="M1232 260L1096 151M1232 260L1368 151M1232 260L1096 369M1232 260L1368 369" stroke="url(#accent)" stroke-opacity=".45" stroke-width="2"/>
+<g transform="translate(1188 208) scale(.6825)"><path opacity=".35" filter="url(#logoGlow)" d="M43 47C48 38 57 33 67 33H75C90 33 102 45 102 60C102 75 90 87 75 87H67" stroke="#2EDCFF" stroke-width="12" stroke-linecap="round"/><path d="M43 47C48 38 57 33 67 33H75C90 33 102 45 102 60C102 75 90 87 75 87H67" stroke="url(#logoGradient)" stroke-width="10" stroke-linecap="round" fill="none"/><path d="M85 81C80 90 71 95 61 95H53C38 95 26 83 26 68C26 53 38 41 53 41H61" stroke="url(#logoGradient)" stroke-width="10" stroke-linecap="round" fill="none"/><path d="M50 64H78" stroke="url(#logoGradient)" stroke-width="10" stroke-linecap="round"/></g>
+<text x="1232" y="328" text-anchor="middle" fill="#eef7ff" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="14" font-weight="800">Genia Link</text><text x="1232" y="350" text-anchor="middle" fill="#91a6ba" font-family="Inter,Segoe UI,Arial,sans-serif" font-size="9">Trusted local network</text>
+<g font-family="Inter,Segoe UI,Arial,sans-serif"><g><rect x="1036" y="130" width="120" height="42" rx="7" fill="#0b1727" stroke="#82bceb" stroke-opacity=".20"/><text x="1096" y="149" text-anchor="middle" fill="#eef7ff" font-size="12" font-weight="700">PC</text><text x="1096" y="164" text-anchor="middle" fill="#65f2bb" font-size="8">Trusted</text></g><g><rect x="1308" y="130" width="120" height="42" rx="7" fill="#0b1727" stroke="#82bceb" stroke-opacity=".20"/><text x="1368" y="149" text-anchor="middle" fill="#eef7ff" font-size="12" font-weight="700">Laptop</text><text x="1368" y="164" text-anchor="middle" fill="#65f2bb" font-size="8">Direct</text></g><g><rect x="1036" y="348" width="120" height="42" rx="7" fill="#0b1727" stroke="#82bceb" stroke-opacity=".20"/><text x="1096" y="367" text-anchor="middle" fill="#eef7ff" font-size="12" font-weight="700">Phone</text><text x="1096" y="383" text-anchor="middle" fill="#65f2bb" font-size="8">Local</text></g><g><rect x="1308" y="348" width="120" height="42" rx="7" fill="#0b1727" stroke="#82bceb" stroke-opacity=".20"/><text x="1368" y="367" text-anchor="middle" fill="#eef7ff" font-size="12" font-weight="700">Tablet</text><text x="1368" y="383" text-anchor="middle" fill="#65f2bb" font-size="8">Secure</text></g></g>
+</svg>
