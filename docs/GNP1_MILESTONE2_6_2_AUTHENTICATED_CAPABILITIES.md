@@ -133,3 +133,31 @@ Android participates in M2.6.2 advertisement using the current Client capability
 10. Restart both peers. The capability set/profile must restore without new pairing.
 11. Run `scripts\SecurityCheck-Android.ps1` and require all build/analyzer/self-tests to pass.
 12. Regression-test Windows <-> Windows, Windows <-> Android and Android <-> Android transfer/discovery after the new GLC1 envelope is enabled.
+
+## Android Keystore signing compatibility fix
+
+Android ECDSA signing now retrieves the existing non-exportable key through
+`KeyStore.GetEntry(alias, null)` and `KeyStore.PrivateKeyEntry.PrivateKey`.
+This follows the Android Keystore signing model and avoids relying on a managed
+`is IPrivateKey` check over the object returned by `GetKey()`, which can fail on
+real Android runtimes even when the Keystore entry itself is a valid private key.
+
+The change does **not** replace the key, Device ID, key generation, pairing
+anchor, or Trusted Identity Registry records. Existing trusted relationships
+remain valid. Android can now publish GNP/1 signed discovery and M2.6.2 signed
+capability advertisements instead of falling back to legacy GLD2 discovery.
+
+## Live validation status — 2026-09-18
+
+Field testing on Windows and multiple Android devices confirmed:
+
+- Android publishes GNP/1 M2.6.2 signed capability advertisements after the Keystore fix.
+- Windows verifies and accepts authenticated capability advertisements from trusted Android peers.
+- The Android Client capability set resolves automatically to the `Client` profile on Windows.
+- Android verifies Windows M2.6.2 capability advertisements, including a changed Server capability revision.
+- Existing Device IDs, trusted pairings and signing-key generations remained intact across the update.
+- Encrypted file transfer continued to work in both directions between Windows and Android peers.
+
+Android-to-Android authenticated capability acceptance remains a final explicit
+log checkpoint before M2.6.2 is considered fully closed.
+

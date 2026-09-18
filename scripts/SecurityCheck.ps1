@@ -101,6 +101,16 @@ if ($windowsMainIdentityText -notmatch 'readonly\s+LocalIdentity\s+_identity') {
 
 $androidIdentityPath = Join-Path $root 'src\GeniaLink.Android\Services\AndroidLocalIdentity.cs'
 $androidIdentityText = Get-Content -LiteralPath $androidIdentityPath -Raw
+# Android Keystore ECDSA signing must obtain a PrivateKeyEntry explicitly.
+# On real Android devices GetKey() can surface a Java key wrapper that does not
+# satisfy a managed `is IPrivateKey` pattern even though the Keystore key is valid.
+if ($androidIdentityText -notmatch 'GetEntry\(SigningKeyAlias,\s*null\)' -or
+    $androidIdentityText -notmatch 'KeyStore\.PrivateKeyEntry' -or
+    $androidIdentityText -notmatch 'privateKeyEntry\.PrivateKey' -or
+    $androidIdentityText -match 'GetKey\(SigningKeyAlias,\s*null\)') {
+    throw 'Android ECDSA signing must use AndroidKeyStore PrivateKeyEntry.PrivateKey instead of managed type-checking the result of GetKey().'
+}
+
 if ($androidIdentityText -notmatch 'AndroidLocalIdentity\s*:\s*IDeviceSigningIdentity' -or
     $androidIdentityText -notmatch 'AndroidKeyStore' -or
     $androidIdentityText -notmatch 'identity\.json') {
