@@ -225,25 +225,34 @@ internal sealed class AndroidLocalIdentity : IDeviceSigningIdentity, ISigningKey
         try
         {
             using var keyStore = OpenKeyStore();
-            var key = keyStore.GetKey(SigningKeyAlias, null)
-                ?? throw new CryptographicException("Android Keystore signing private key is missing.");
+            var entry = keyStore.GetEntry(SigningKeyAlias, null)
+                ?? throw new CryptographicException("Android Keystore signing private-key entry is missing.");
             try
             {
-                if (key is not IPrivateKey privateKey)
+                if (entry is not KeyStore.PrivateKeyEntry privateKeyEntry)
                 {
-                    throw new CryptographicException("Android Keystore signing entry is not a private key.");
+                    throw new CryptographicException("Android Keystore signing entry is not a PrivateKeyEntry.");
                 }
 
-                using var signer = Signature.GetInstance("SHA256withECDSA")
-                    ?? throw new CryptographicException("Android ECDSA signature engine is unavailable.");
-                signer.InitSign(privateKey);
-                signer.Update(payloadCopy);
-                return signer.Sign()
-                    ?? throw new CryptographicException("Android Keystore did not produce an ECDSA signature.");
+                var privateKey = privateKeyEntry.PrivateKey
+                    ?? throw new CryptographicException("Android Keystore signing private key is missing.");
+                try
+                {
+                    using var signer = Signature.GetInstance("SHA256withECDSA")
+                        ?? throw new CryptographicException("Android ECDSA signature engine is unavailable.");
+                    signer.InitSign(privateKey);
+                    signer.Update(payloadCopy);
+                    return signer.Sign()
+                        ?? throw new CryptographicException("Android Keystore did not produce an ECDSA signature.");
+                }
+                finally
+                {
+                    privateKey.Dispose();
+                }
             }
             finally
             {
-                key.Dispose();
+                entry.Dispose();
             }
         }
         catch (Java.Security.GeneralSecurityException ex)
