@@ -2,6 +2,17 @@
 
 All notable public source snapshots of Genia Link will be documented here.
 
+## Unreleased
+
+### M2.6.2 Android Keystore validation — 2026-09-18
+
+- Fixed Android ECDSA signing to use the existing non-exportable Android Keystore `PrivateKeyEntry`.
+- Confirmed live M2.6.2 signed capability advertisement from Android without legacy GLD2 fallback.
+- Confirmed authenticated Android capability acceptance and automatic `Client` profile resolution on Windows.
+- Confirmed Windows Server capability revision advertisement is verified on Android.
+- Existing Device IDs, pairings and signing-key generations remain unchanged.
+- No release or tag is created for this development checkpoint.
+
 ## v0.3.1 RC4 / GNP/1 M2.6.2 — 2026-09-16
 
 Initial public source snapshot of Genia Link.
