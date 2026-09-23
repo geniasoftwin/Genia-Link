@@ -10,7 +10,7 @@
   <a href="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml"><img src="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml/badge.svg?branch=main" alt="Genia Link CI" /></a>
 </p>
 
-Genia Link is a local-first device link for trusted file exchange between Windows and Android devices. The current public source snapshot on `main` is **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**. Active development has reached the **GNP/1 M2.7** checkpoint: bounded concurrent trusted transfers, live device roles/capabilities, local aliases, scalable device filtering/actions, and a separate diagnostics window.
+Genia Link is a local-first device link for trusted file exchange between Windows and Android devices. The current public source snapshot on `main` is **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**. M2.7 work is being developed and tested separately; its implementation is **not included in the current public source snapshot**.
 
 > **Development status:** release-candidate / protocol-development checkpoint. Interfaces, packaging, and GNP/1 details may change before a stable release.
 
@@ -26,7 +26,6 @@ Genia Link is a local-first device link for trusted file exchange between Window
 - Replay-hardened signed identity assertions.
 - Local lifecycle states for trusted identities: Active, Retired, and Revoked.
 - GNP/1 M2.6.2 authenticated device capability advertisements.
-- GNP/1 M2.7 development checkpoint: bounded per-peer concurrent transfers, service-ready UI, local device aliases, authenticated live role presentation, dynamic real-device filters/actions, and separate diagnostics.
 - Windows and Android clients sharing the protocol/core implementation.
 - Android optional **Always Ready** mode for long-idle availability.
 - No third-party NuGet `PackageReference` dependencies in this source snapshot.
@@ -61,13 +60,13 @@ For the exact current development workflow and RC4 test notes, see:
 - [Development notes (Russian)](docs/DEVELOPMENT_NOTES_RU.md)
 - [Protocol notes](docs/PROTOCOL.md)
 - [GNP/1 M2.6.2 checkpoint](docs/GNP1_MILESTONE2_6_2_AUTHENTICATED_CAPABILITIES.md)
-- [GNP/1 M2.7 checkpoint](docs/GNP1_MILESTONE2_7_SERVICE_CONCURRENCY_DEVICE_UI.md)
+- [GNP/1 M2.7 development record — implementation not in this snapshot](docs/GNP1_MILESTONE2_7_SERVICE_CONCURRENCY_DEVICE_UI.md)
 - [RC4 final test checklist](docs/RC4_FINAL_TEST.md)
 - [Security implementation notes](docs/SECURITY_IMPLEMENTATION.md)
 
 ## Releases and changelog
 
-Public source snapshot notes are tracked in [CHANGELOG.md](CHANGELOG.md). M2.7 is being recorded as a development checkpoint, not as a GitHub Release or tag; release binaries are not bundled in the repository.
+Public source snapshot notes are tracked in [CHANGELOG.md](CHANGELOG.md). The current public source remains M2.6.2. The M2.7 document records separately tested development work and does not mean that the M2.7 implementation is present in this repository snapshot.
 
 ## Security
 
