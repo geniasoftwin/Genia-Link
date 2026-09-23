@@ -4,22 +4,20 @@ All notable public source snapshots of Genia Link will be documented here.
 
 ## Unreleased
 
-### GNP/1 M2.7 — Service Concurrency & Device UI — 2026-09-20
+### GNP/1 M2.7 development record — 2026-09-20
 
-- Added bounded file-level concurrency without changing the transfer wire format: up to three outgoing trusted sessions per peer and up to four concurrent incoming trusted sessions.
-- Preserved independent trusted handshake, secure channel, resume state and SHA-256 verification for every file session.
-- Added per-peer scheduling so separate Send To requests can share the same bounded session pool; duplicate source files are serialized to avoid resume-state races.
-- Added per-file transfer activity rows and a compact completed-transfer history instead of multiplexing all concurrent progress into one progress bar.
-- Added local per-device aliases keyed by stable Device ID while preserving the original advertised device name and all cryptographic identity/trust state.
-- Added authenticated role presentation and live role/profile refresh from accepted capability revisions.
-- Added device search and dynamic filters generated only from states, authenticated roles and authenticated services that are actually present.
-- Added a service-ready selected-device UI with common Files access and a dynamic Actions menu; future Print/Scan/Chat entries are intentionally not shown until real authenticated services exist.
-- Moved diagnostics out of the main work surface into a dedicated menu-only window with copy/clear controls and wrapped log lines.
-- Added Windows crash diagnostics and safer Explorer launching for completed transfer history.
-- Added a Windows Firewall diagnostic note for rebuilt/moved executables that may need a new Private-network allowance for inbound TCP 47500.
-- Live testing confirmed true simultaneous Windows → Android and Android → Windows transfers, slot refill behavior, successful integrity verification, and immediate authenticated role updates in the UI.
+> **Documentation-only checkpoint.** The public source tree in this pull request remains the M2.6.2 snapshot. The M2.7 implementation described below was developed and tested in a separate local development build and is not included in this repository snapshot.
+
+- Local M2.7 development testing covered bounded file-level concurrency without changing the transfer wire format: up to three outgoing trusted sessions per peer and up to four concurrent incoming trusted sessions.
+- Local testing used independent trusted handshakes, secure channels, resume state and SHA-256 verification for file sessions.
+- Local testing covered per-peer scheduling for separate Send To requests and serialization of duplicate source files to avoid resume-state races.
+- M2.7 UI development covered per-file transfer activity rows and a compact completed-transfer history.
+- M2.7 UI development covered local per-device aliases keyed by stable Device ID while preserving the original advertised device name and cryptographic identity/trust state.
+- M2.7 development covered authenticated role presentation, live role/profile refresh, device search, dynamic filters/actions and a separate diagnostics window.
+- Service availability gated by authenticated capability sets remains an M2.7 design requirement that must be present and verified in a future published M2.7 source snapshot.
+- Local testing recorded simultaneous Windows → Android and Android → Windows transfers, slot refill behavior and successful integrity completion.
 - Protocol version remains 3; pairing, Device IDs, signing keys and the M2.6.2 signed-capability advertisement format remain unchanged.
-- No release or tag is created for this development checkpoint.
+- No release or tag is created for this documentation checkpoint.
 
 ### M2.6.2 Android Keystore validation — 2026-09-18
 
