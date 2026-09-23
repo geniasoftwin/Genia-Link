@@ -1,10 +1,12 @@
 # GNP/1 M2.7 — Service Availability, Concurrent Transfers and Device UI
 
+> **Status of this document:** this is a development/design and validation record for M2.7 work performed in a separate local development build. The implementation described below is **not included in this pull request or in the current public source snapshot**. The public source tree remains M2.6.2. Statements below must therefore not be read as claims about the behavior of the source currently visible in this repository.
+
 ## Goal
 
-M2.7 turns the authenticated capability state introduced in M2.6.2 into visible application behavior while keeping the trust model unchanged.
+M2.7 is intended to turn the authenticated capability state introduced in M2.6.2 into visible application behavior while keeping the trust model unchanged.
 
-The checkpoint combines three areas:
+The development checkpoint combines three areas:
 
 1. service availability derived from authenticated capability sets;
 2. bounded concurrent file-transfer sessions;
@@ -14,45 +16,49 @@ M2.7 does **not** create trust from capabilities and does not introduce network-
 
 ## Service availability
 
-A service is considered mutually available only when the required capability is present in valid authenticated capability state.
+Capability-gated service availability is an **M2.7 design requirement**, not behavior provided by the current public M2.6.2 source tree.
 
-Examples:
+Before a future M2.7 source snapshot is published, service entry points must enforce the required authenticated capability on both initiating and receiving paths.
+
+Planned examples:
 
 - File Transfer requires `FileTransfer`;
 - Shared Resources requires `SharedResources`.
 
-The service layer is intentionally prepared for future capabilities such as Print, Scan, Storage and Messaging, but the UI must not expose an action merely because it is planned. Filters and actions are generated only from states, authenticated roles and authenticated services that actually exist.
+The service layer is intended to support future capabilities such as Print, Scan, Storage and Messaging, but the UI must not expose an action merely because it is planned. Filters and actions should be generated only from states, authenticated roles and authenticated services that actually exist.
 
 A signed LAN capability advertisement is not sufficient by itself to establish trust. Pairing, Trusted Identity Registry state, pinned signing identity, lifecycle state and the trusted-session handshake remain authoritative.
 
 ## Concurrent trusted transfers
 
-M2.7 adds bounded file-level parallelism. It deliberately does not split one file into multiple transport streams.
+A separately tested M2.7 development build used bounded file-level parallelism. It deliberately did not split one file into multiple transport streams.
 
-Default policy:
+Development policy used during testing:
 
 - up to **3 outgoing file sessions per peer**;
 - up to **4 concurrent incoming trusted sessions** per receiver;
-- each file keeps an independent trusted handshake, secure channel, transfer ID, resume offset and SHA-256 integrity verification;
-- duplicate transfers of the same source file to the same peer are serialized to avoid resume-state races;
-- a file is shown as completed only after the trusted transfer returns successfully after receiver-side integrity verification.
+- each file session kept an independent trusted handshake, secure channel, transfer ID, resume offset and SHA-256 integrity verification;
+- duplicate transfers of the same source file to the same peer were serialized to avoid resume-state races;
+- a file was shown as completed only after the trusted transfer returned successfully after receiver-side integrity verification.
 
-Parallelism is implemented as multiple ordinary trusted transfer sessions, so protocol version 3 and the existing transfer wire format remain unchanged.
+This development approach used multiple ordinary trusted transfer sessions, so protocol version 3 and the existing transfer wire format did not need to change.
+
+The current public source tree does not contain this scheduler/receiver concurrency implementation.
 
 ## Per-peer scheduler
 
-Separate Windows Send To requests share the same bounded per-peer pool. When three trusted sessions are active, the next transfer waits until a slot becomes available.
+In the separately tested M2.7 development build, separate Windows Send To requests shared the same bounded per-peer pool. When three trusted sessions were active, the next transfer waited until a slot became available.
 
-This keeps concurrency local to a peer and avoids unbounded fan-out while still allowing independent files to make progress simultaneously.
+This behavior is recorded here as development validation and is not implemented by the current public source snapshot.
 
 ## Device identity UI
 
-A device has two distinct presentation names:
+The M2.7 UI design uses two distinct presentation names:
 
 - **Original name** — the name announced by the remote device;
 - **Local alias** — an optional name chosen only on the local device.
 
-Aliases are stored by stable Device ID and never modify:
+The intended alias model stores aliases by stable Device ID and does not modify:
 
 - Device ID;
 - pairing/trust state;
@@ -63,48 +69,48 @@ Aliases are stored by stable Device ID and never modify:
 
 The original name remains available even when a local alias is set.
 
+The alias editor/storage path is not present in the current public source snapshot.
+
 ## Authenticated roles and live refresh
 
-Client / Server / Relay / Backup / Custom presentation is derived from capabilities already accepted into the Trusted Identity Registry.
+The M2.7 development UI derives Client / Server / Relay / Backup / Custom presentation from capabilities already accepted into the Trusted Identity Registry.
 
 A merely signed but not yet trusted capability advertisement does not by itself produce a trusted role.
 
-Accepted capability revisions update the visible role/profile without requiring restart or re-pairing. Live testing confirmed that role changes propagate to the remote UI effectively immediately after the updated profile is saved and accepted.
+Local M2.7 testing recorded live role/profile refresh after accepted capability revisions without restart or re-pairing. This observation refers to the separate development build, not the current public source tree.
 
 Device type, role and availability remain separate concepts.
 
 ## Scalable device list
 
-The Windows device pane now includes:
+The separately developed M2.7 Windows UI included:
 
 - `Devices — N`;
 - search;
-- dynamic filters generated only from states, authenticated roles and authenticated services currently present;
-- no empty future filters such as Print, Scan or Relay when those capabilities are absent;
+- dynamic filters generated from states, authenticated roles and authenticated services present in the development build;
+- no empty future filters such as Print, Scan or Relay when those capabilities were absent;
 - a selected-device header with common Files access and a dynamic `Actions` menu.
 
-This is intended to remain usable as the trusted-device list grows from a few devices to dozens.
+These controls are not present in the current public source snapshot.
 
 ## Transfer activity UI
 
-Concurrent transfers are represented by independent activity rows instead of sharing one global progress bar.
+The separately developed M2.7 UI represented concurrent transfers with independent activity rows rather than one shared progress bar.
 
-Successfully verified transfers move into a compact Completed section:
+Its Completed section was designed with:
 
 - bounded recent history;
 - consistent full-width rows;
 - filename, direction/peer and completion time aligned predictably;
-- long names use ellipsis;
-- clicking a completed item opens/selects the local file through a constrained Explorer launcher;
-- clearing the UI history never deletes transfer files.
+- ellipsis for long names;
+- constrained Explorer opening/selection for completed local files;
+- UI-history clearing that does not delete transfer files.
 
-The Completed area uses the available Files-workspace height rather than reserving blank space for unrelated future features.
+These activity/history controls are not present in the current public source snapshot.
 
 ## Diagnostics
 
-Technical diagnostics are intentionally removed from the normal work surface.
-
-They are available only from the overflow menu in a dedicated Diagnostics window with:
+The separately developed M2.7 UI moved technical diagnostics out of the main work surface into a dedicated Diagnostics window with:
 
 - bounded live log history;
 - Copy;
@@ -112,20 +118,24 @@ They are available only from the overflow menu in a dedicated Diagnostics window
 - wrapped long lines;
 - no horizontal scrollbar.
 
+The current public source snapshot still uses the earlier in-window diagnostics presentation.
+
 Diagnostics presentation does not alter transfer state or trust state.
 
 ## Future service UI decisions
 
-M2.7 lays the UI foundation for service-driven actions without pretending that unfinished services already exist.
+M2.7 is intended to lay the UI foundation for service-driven actions without pretending that unfinished services already exist.
 
 Planned rules:
 
 - Print and Scan appear under `Actions` only when real authenticated implementations/capabilities exist;
 - the same principle applies to Storage and other device services;
-- Chat is planned as a separate user window, similar to Diagnostics being a separate technical window, rather than a permanently reserved area in the main Files workspace;
+- Chat is planned as a separate user window rather than a permanently reserved area in the main Files workspace;
 - a Chat affordance is added only when a real authenticated messaging service exists.
 
 ## Compatibility
+
+The M2.7 development work was designed around these compatibility constraints:
 
 - Protocol version remains 3.
 - M2.6.2 `GLC1` signed capability advertisement format remains compatible.
@@ -134,22 +144,24 @@ Planned rules:
 - Existing Device IDs and signing keys remain unchanged.
 - Single-file transfer remains compatible with the existing trusted transfer protocol.
 
-## Live validation completed
+## Local validation record
 
-Real-device testing completed during M2.7 development confirmed:
+Real-device testing performed on separate M2.7 development builds recorded:
 
-- true simultaneous Windows → Android trusted sessions;
-- true simultaneous Android → Windows trusted sessions;
-- three active outgoing slots with immediate refill when one completes;
-- successful SHA-256/integrity completion across parallel batches;
-- safe failure when a stale/sleeping endpoint does not accept a connection, followed by successful transfer after fresh signed discovery/authenticated contact;
-- live authenticated role/profile updates in the UI;
-- dynamic role/service/state filters based on what is actually present;
-- diagnostics separated from the main UI;
-- transfer-history and multi-progress UI behavior under real concurrent load.
+- simultaneous Windows → Android trusted sessions;
+- simultaneous Android → Windows trusted sessions;
+- three active outgoing slots with refill when one completed;
+- successful integrity completion across parallel batches;
+- safe failure when a stale/sleeping endpoint did not accept a connection, followed by successful transfer after fresh signed discovery/authenticated contact;
+- live role/profile updates in the M2.7 development UI;
+- dynamic role/service/state filters in that development UI;
+- diagnostics separated from the main UI in that development UI;
+- transfer-history and multi-progress behavior under concurrent load.
+
+These observations are development test notes. They **cannot be reproduced from the current public source snapshot**, because the corresponding M2.7 implementation is not part of this pull request.
 
 No raw live logs are published because they can contain device identifiers, signing-key identifiers, IP addresses and local device names.
 
 ## Development status
 
-M2.7 is a development checkpoint in the existing v0.3.1 RC4 line. It is documented through normal commits/PR history and is **not** intended to create a separate GitHub Release or tag.
+M2.7 remains a development checkpoint in the existing v0.3.1 RC4 line. This pull request publishes documentation only and does **not** publish the M2.7 implementation, create a GitHub Release, or create a tag. A future source publication should include the implementation and re-run the repository build/security checks against that exact tree.
