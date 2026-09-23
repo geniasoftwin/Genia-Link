@@ -10,7 +10,7 @@
   <a href="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml"><img src="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml/badge.svg?branch=main" alt="Genia Link CI" /></a>
 </p>
 
-Genia Link — локальная система связи между доверенными устройствами для прямого обмена файлами между Windows и Android. Текущий публичный снимок исходного кода: **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**.
+Genia Link — локальная система связи между доверенными устройствами для прямого обмена файлами между Windows и Android. Текущий публичный снимок исходного кода в `main`: **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**. Работа над M2.7 ведётся и тестируется отдельно; реализация M2.7 **не входит в текущий публичный снимок исходников**.
 
 > **Статус разработки:** release candidate / промежуточный этап развития протокола. До стабильного релиза интерфейсы, упаковка и детали GNP/1 могут изменяться.
 
@@ -60,12 +60,13 @@ branding/               Графика и заметки по брендингу
 - [Подробные заметки разработки](docs/DEVELOPMENT_NOTES_RU.md)
 - [Описание протокола](docs/PROTOCOL.md)
 - [GNP/1 M2.6.2](docs/GNP1_MILESTONE2_6_2_AUTHENTICATED_CAPABILITIES.md)
+- [GNP/1 M2.7 — запись разработки, реализация не входит в этот снимок](docs/GNP1_MILESTONE2_7_SERVICE_CONCURRENCY_DEVICE_UI.md)
 - [Финальный RC4 regression-чеклист](docs/RC4_FINAL_TEST.md)
 - [Технические заметки по безопасности](docs/SECURITY_IMPLEMENTATION.md)
 
 ## Релизы и changelog
 
-Заметки о публичных снимках исходного кода ведутся в [CHANGELOG.md](CHANGELOG.md). Текущий RC4/M2.6.2 — предварительный снимок исходников; готовые бинарные релизы в сам репозиторий не включены.
+Заметки о публичных снимках исходного кода ведутся в [CHANGELOG.md](CHANGELOG.md). Текущий публичный исходный код остаётся на M2.6.2. Документ M2.7 фиксирует отдельно протестированную работу разработки и не означает, что реализация M2.7 присутствует в этом снимке репозитория.
 
 ## Безопасность
 

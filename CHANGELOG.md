@@ -4,6 +4,21 @@ All notable public source snapshots of Genia Link will be documented here.
 
 ## Unreleased
 
+### GNP/1 M2.7 development record — 2026-09-20
+
+> **Documentation-only checkpoint.** The public source tree in this pull request remains the M2.6.2 snapshot. The M2.7 implementation described below was developed and tested in a separate local development build and is not included in this repository snapshot.
+
+- Local M2.7 development testing covered bounded file-level concurrency without changing the transfer wire format: up to three outgoing trusted sessions per peer and up to four concurrent incoming trusted sessions.
+- Local testing used independent trusted handshakes, secure channels, resume state and SHA-256 verification for file sessions.
+- Local testing covered per-peer scheduling for separate Send To requests and serialization of duplicate source files to avoid resume-state races.
+- M2.7 UI development covered per-file transfer activity rows and a compact completed-transfer history.
+- M2.7 UI development covered local per-device aliases keyed by stable Device ID while preserving the original advertised device name and cryptographic identity/trust state.
+- M2.7 development covered authenticated role presentation, live role/profile refresh, device search, dynamic filters/actions and a separate diagnostics window.
+- Service availability gated by authenticated capability sets remains an M2.7 design requirement that must be present and verified in a future published M2.7 source snapshot.
+- Local testing recorded simultaneous Windows → Android and Android → Windows transfers, slot refill behavior and successful integrity completion.
+- Protocol version remains 3; pairing, Device IDs, signing keys and the M2.6.2 signed-capability advertisement format remain unchanged.
+- No release or tag is created for this documentation checkpoint.
+
 ### M2.6.2 Android Keystore validation — 2026-09-18
 
 - Fixed Android ECDSA signing to use the existing non-exportable Android Keystore `PrivateKeyEntry`.
