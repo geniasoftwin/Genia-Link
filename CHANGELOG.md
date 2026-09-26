@@ -4,6 +4,17 @@ All notable public source snapshots of Genia Link will be documented here.
 
 ## Unreleased
 
+### M2.8.2 Print/PDF validation — 2026-09-26
+
+- Development has progressed beyond the public M2.6.2 source snapshot through the M2.7 transfer/resume UX checkpoint and into the M2.8 print-service line.
+- Verified physical end-to-end image printing over the trusted GNP/1 path: Android → Windows Print Gateway → Samsung SCX-4300 Series.
+- Verified PDF printing over the same authenticated trusted path.
+- Corrected PDF page geometry so the physical output scale matches direct Windows printing on the tested printer.
+- Print-service discovery keeps `PrinterGateway` as an authenticated capability statement; discovery alone does not imply trust or authorize a print job.
+- Printing reuses the existing trusted GNP/1 session rather than opening a separate unauthenticated print service port.
+- The public `main` source snapshot still remains M2.6.2 until the newer development source is synchronized and revalidated for publication.
+- See `docs/DEVELOPMENT_STATUS.md` for the current checkpoint matrix and publication boundary.
+
 ### M2.6.2 Android Keystore validation — 2026-09-18
 
 - Fixed Android ECDSA signing to use the existing non-exportable Android Keystore `PrivateKeyEntry`.
