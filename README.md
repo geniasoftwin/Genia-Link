@@ -34,11 +34,13 @@ Genia Link is a local-first device link for trusted file exchange between Window
 
 The public source snapshot on `main` remains **v0.3.1 RC4 / GNP/1 M2.6.2**. Active development has progressed further and is being validated before the next source synchronization.
 
-As of **2026-09-26**:
+As of **2026-09-27**:
 
 - **GNP/1 M2.7** — large-batch/concurrent transfer and resume/history UX checkpoint completed in the development line.
 - **GNP/1 M2.8.1 Print Service Foundation** — physical end-to-end printing verified: Android → authenticated GNP/1 session → Windows Print Gateway → physical printer.
 - **GNP/1 M2.8.2 PDF Printing** — PDF printing verified on a **Samsung SCX-4300 Series**, including a scaling fix that now matches the physical scale of direct Windows printing on the same printer.
+- **GNP/1 M2.8.3 Windows Remote Print Client** — physical Windows → authenticated GNP/1 → Windows Print Gateway → Samsung SCX-4300 printing verified; image `ActualSize` was also checked with a 50 × 50 mm calibration target and matched direct Windows printing.
+- **GNP/1 M2.8.4 Office Document Print Bridge** — development implementation now accepts validated macro-free DOCX/XLSX/PPTX and renders locally to PDF. The backend preference is Microsoft Office → LibreOffice → Apache OpenOffice; the compatible-suite path is implemented but still requires build/runtime/physical validation before this checkpoint is marked passed.
 - Printing reuses the existing trusted GNP/1 session; no separate unauthenticated print port is introduced.
 - `PrinterGateway` discovery does not itself grant trust or print authorization.
 
