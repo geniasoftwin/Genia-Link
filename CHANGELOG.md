@@ -4,6 +4,22 @@ All notable public source snapshots of Genia Link will be documented here.
 
 ## Unreleased
 
+### M2.8.4 Office Document Print Bridge development — 2026-09-27
+
+- Added development support for validated macro-free DOCX/XLSX/PPTX over the existing authenticated print session; no new GNP/1 print message range or unauthenticated listener is introduced.
+- Office documents render locally to temporary PDF and then reuse the physically validated Genia Link PDF print renderer.
+- Backend preference is Microsoft Office → LibreOffice → Apache OpenOffice.
+- The LibreOffice/OpenOffice fallback is restricted to known Program Files `soffice` binaries, structured arguments, `UseShellExecute=false`, headless conversion, isolated per-job user profiles, and a bounded conversion lifetime.
+- The compatible-suite fallback is implemented in the development package and still requires build/runtime/physical validation before M2.8.4 is marked passed.
+- Public `main` source remains the M2.6.2 snapshot; this changelog entry records development progress only.
+
+### M2.8.3 Windows Remote Print physical validation — 2026-09-27
+
+- Verified Windows → authenticated GNP/1 → Windows Print Gateway → Samsung SCX-4300 physical printing.
+- Verified the physical/virtual printer picker path from the Windows client.
+- Verified image scaling modes with a calibration image; `ActualSize` produced a measured 50 × 50 mm target and matched direct Windows printing on the same printer.
+- Existing M2.7 file-transfer behavior remained functional during the remote-print tests.
+
 ### M2.8.2 Print/PDF validation — 2026-09-26
 
 - Development has progressed beyond the public M2.6.2 source snapshot through the M2.7 transfer/resume UX checkpoint and into the M2.8 print-service line.
