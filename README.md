@@ -1,3 +1,23 @@
+## Current development checkpoint — GNP/1 M2.8.4.4 fix23 (physically validated 2026-10-03)
+
+Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.4 Print Job Lifecycle / Error Recovery · fix23**.
+
+Validated on the Android → trusted Windows gateway → Samsung SCX-4300 path:
+- authenticated remote printer discovery and print submission;
+- M2.8.4.3 TXT backend with UTF-8, real TAB stops, wrapping and multi-page pagination;
+- image/PDF/Office print paths and compact icon/tile print settings;
+- opt-in authenticated lifecycle V5 status transport with conservative `Queued / Printing / AttentionRequired / Completed / Cancelled / Failed / Unknown` semantics;
+- read-only Windows status observation through System.Printing, Win32 printer/job status, spooler change notifications and bounded Bidi probing;
+- conservative fallback **«Передано принтеру · физический статус принтера недоступен»** when an old driver removes a job before physical completion can be proven;
+- fix21 precedence correction so `PRINTED + DELETING` is not misreported as a user cancellation;
+- fix23 ordered Android foreground-service cleanup: the temporary **«Отправка файла / Печать…»** notification now disappears after the terminal print result, while the separate **«Genia Link · Готов к приёму»** availability notification remains.
+
+The Samsung SCX-4300 is a useful legacy-driver baseline: it can accept and physically print jobs while exposing no reliable paper-out/jam completion signal through the tested standard Windows channels. Genia Link therefore does not synthesize physical success. More printers, including newer models, are planned for compatibility testing.
+
+**Next development step:** M2.8.4.5 Cancel / Retry — explicit user cancellation and convenient retry while preserving the selected file and print settings.
+
+> Repository note: this update records the physically validated development state. A full source-tree synchronization from the tested fix23 package is kept separate from documentation changes so the public tree is never partially replaced.
+
 # Genia Link
 
 <p align="center">
