@@ -1,3 +1,16 @@
+## GNP/1 M2.8.4.4 fix23 — physical validation checkpoint — 2026-10-03
+
+- Physically validated Android → trusted Windows PrinterGateway → Samsung SCX-4300 remote printing on the fix23 package.
+- M2.8.4.3 TXT printing remains intact, including UTF-8, 8-character monospace TAB stops, wrapping and multi-page pagination.
+- Lifecycle monitoring remains conservative: a spooler job disappearing is not treated as proof of physical completion.
+- Legacy SCX-4300 testing confirmed that standard System.Printing, Win32 queue/job status and Bidi may expose no paper-feed/jam completion state after the driver hands the job off. The Android UI therefore uses the honest terminal fallback **«Передано принтеру · физический статус принтера недоступен»**.
+- fix21 prevents the native `PRINTED + DELETING` combination from being classified as a user cancellation.
+- fix23 routes terminal Android transfer/print cleanup through an ordered `TRANSFER_STOP` command owned by the foreground service. Physical testing confirmed that the temporary print/transfer notification is removed after completion while the independent Always Ready notification remains.
+- Compact icon/tile print settings are retained for image and Excel options.
+- No cloud, HTTP, analytics, third-party package, new unauthenticated listener, printer mutation, Bidi Set, or automatic job cancellation was added.
+- Next planned checkpoint: **M2.8.4.5 Cancel / Retry**.
+- Additional physical testing on older and newer printer models remains planned.
+
 # Changelog
 
 All notable public source snapshots of Genia Link will be documented here.
