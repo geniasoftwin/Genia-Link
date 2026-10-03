@@ -1,3 +1,13 @@
+## M2.8.4.4 fix23 security checkpoint — 2026-10-03
+
+The physically validated fix23 development package keeps the existing local-only trust boundary: authenticated GNP/1 sessions, trusted PrinterGateway capability enforcement, SHA-256 staging, bounded print payloads and no HTTP/cloud/analytics path.
+
+Print lifecycle observation is read-only. System.Printing, `GetPrinter(PRINTER_INFO_6)`, bounded `EnumJobs`, spooler change notifications and Bidi status probing are used only to observe local Windows state. Genia Link does not issue Bidi `Set`, `SetPrinter`, `SetJob` or automatic cancellation as part of M2.8.4.4.
+
+When the installed driver cannot prove physical completion, Genia Link fails conservative rather than claiming success. The tested Samsung SCX-4300 can remove a job from the Windows queue before physical paper handling is known, so the client reports that the job was handed to the printer while physical status is unavailable.
+
+fix23 changes Android foreground-notification ownership/cleanup only; it does not weaken trusted transport, printer authorization, staging limits or lifecycle authentication.
+
 # Security Policy
 
 ## Reporting a vulnerability
