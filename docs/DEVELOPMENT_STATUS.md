@@ -1,12 +1,12 @@
 # Genia Link Development Status
 
-_Last updated: 2026-09-27_
+_Last updated: 2026-10-06_
 
-This page separates the **public source snapshot currently stored on `main`** from newer development packages that are still being validated before source synchronization.
+This page separates the **public source snapshot currently stored on `main`** from newer development packages that have been physically validated before a deliberate source synchronization.
 
 ## Public source snapshot
 
-The current public source snapshot on `main` is:
+The current public source snapshot on `main` remains:
 
 **v0.3.1 RC4 / GNP/1 M2.6.2 — Authenticated Capabilities**
 
@@ -20,46 +20,44 @@ The active development line has advanced beyond the public M2.6.2 snapshot.
 | --- | --- | --- |
 | GNP/1 M2.7 | Development checkpoint completed | Large-batch scheduling, concurrent trusted transfer handling, resume/history UX and related stability fixes |
 | GNP/1 M2.8.1 | Physical end-to-end test passed | Android → authenticated GNP/1 session → Windows Print Gateway → physical printer |
-| GNP/1 M2.8.2 | Physical PDF test passed | PDF sent from Android through the trusted Windows Print Gateway and printed on a Samsung SCX-4300 Series |
-| M2.8.2 PDF scaling fix | Verified | PDF physical scale now matches printing the same PDF directly from Windows on the tested printer |
-| GNP/1 M2.8.3 | Physical end-to-end test passed | Windows → authenticated GNP/1 → Windows Print Gateway → Samsung SCX-4300; image ActualSize also matched a 50 × 50 mm calibration target and direct Windows printing |
-| GNP/1 M2.8.4 | Implemented; validation in progress | Macro-free DOCX/XLSX/PPTX → local PDF → verified PDF renderer, with Microsoft Office → LibreOffice → Apache OpenOffice backend preference |
+| GNP/1 M2.8.2 | Physical PDF test passed | PDF printing and corrected physical scale on Samsung SCX-4300 Series |
+| GNP/1 M2.8.3 | Physical Windows remote-print test passed | Windows → authenticated GNP/1 → Windows Print Gateway → Samsung SCX-4300; image ActualSize calibration matched direct Windows printing |
+| GNP/1 M2.8.4 | Microsoft Office path physically validated | Macro-free DOCX/XLSX/PPTX local Office-to-PDF bridge; Microsoft Office path exercised physically. LibreOffice/OpenOffice fallback remains implemented but not physically validated |
+| GNP/1 M2.8.4.1 | Check passed | Excel print options remain bounded and authenticated |
+| GNP/1 M2.8.4.2 | Physical/checkpoint validation passed | Print layout and image alignment behavior retained |
+| GNP/1 M2.8.4.3 | Physical TXT backend passed | UTF-8, real TAB stops, wrapping and multi-page pagination |
+| GNP/1 M2.8.4.4 | Physical lifecycle/error-recovery passed | Conservative Queued/Printing/Unknown lifecycle semantics; fix23 Android foreground-notification cleanup |
+| GNP/1 M2.8.4.5 | **Physical + security PASS** | Authenticated Cancel / Retry; pre-spool cancel for image/PDF; Office preparation-aware DOCX cancel; explicit retry with preserved settings; fail-closed late cancel |
+
+Detailed M2.8.4.5 checkpoint: [Cancel / Retry](GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md).
 
 ## Print Service security model
 
-The printing path is intentionally built on the existing Genia Link trust model:
+The printing path remains built on the existing Genia Link trust model:
 
 - No separate unauthenticated print port is introduced.
 - `PrinterGateway` is an authenticated capability advertisement; seeing it during discovery does not by itself authorize printing.
-- Printer discovery and print-job submission use an authenticated trusted GNP/1 session.
+- Printer discovery, print submission and print-control messages use an authenticated trusted GNP/1 session.
+- Cancel ownership is bound to the accepted JobId and authenticated remote device.
+- Retry is manual; an unconfirmed cancellation does not enable retry.
 - Windows remains the print gateway and uses the locally installed Windows printer/driver stack.
-- The tested path remains local-network-first; no Genia Link cloud relay is required for the print job.
+- The tested path remains local-network-first; no Genia Link cloud relay is required.
 
-## Current print scope
+## M2.8.4.5 validation summary
 
-The development print path currently covers:
+The validated checkpoint provides a bounded cancellation window before Windows spooler handoff. For Office documents, cancellation remains available during preparation and a full 3000 ms pre-spool window starts after Office preparation completes. If a job has already left the spooler and the exact Genia Link marker/Windows JobId cannot be proven, cancellation is reported as not confirmed and retry is suppressed.
 
-- JPEG/PNG image printing through a trusted Windows Print Gateway.
-- PDF printing through the same trusted path.
-- Real Windows printer enumeration, including physical and virtual printers.
-- PDF page-size handling corrected so the physical output scale matches direct Windows printing on the tested device.
-- Windows Remote Print Client physically verified through a second trusted Windows Print Gateway.
-- Image scaling modes `Fit / ActualSize / Fill` physically verified; `ActualSize` produced an exact 50 × 50 mm calibration square on the tested printer.
-- Office-document development path for macro-free DOCX/XLSX/PPTX renders locally to PDF. Microsoft Office is preferred; LibreOffice and Apache OpenOffice are available as tightly scoped local fallbacks from known Program Files locations.
-
-The M2.8.4 compatible-suite fallback is implemented in the local development package and is awaiting build/runtime/physical validation.
+Physical tests covered repeated Cancel → Retry → Cancel cycles on DOCX, PDF and image/JPG/PNG paths. Windows and Android security/build gates also passed on the target toolchain.
 
 ## Planned next steps
 
-Near-term work includes:
-
-1. Complete M2.8.4 build/runtime validation with Microsoft Office and at least one compatible-suite fallback (LibreOffice/OpenOffice).
-2. Physically compare DOCX/XLSX/PPTX output against direct local printing on the same printer.
-3. Continue keeping printing additive to the existing trusted transport rather than weakening discovery, pairing, identity, or transfer security.
-4. After the print branch is stable, prepare the next public source synchronization beyond M2.6.2.
+1. Freeze M2.8.4.5 as the validated Cancel / Retry baseline.
+2. Continue the M2.8 print-service line from this checkpoint without modifying the validated Cancel / Retry contract unless a regression requires it.
+3. Expand physical compatibility testing to additional printer/driver models, including newer devices with richer status reporting.
+4. Prepare a deliberate full public source synchronization beyond M2.6.2 only after the selected development checkpoint is packaged and revalidated as a whole.
 
 ## Publication note
 
 The milestones above describe **validated development progress**, not a claim that the corresponding M2.7/M2.8 source has already been synchronized to the public `main` branch.
 
-When that source synchronization is ready, the public snapshot/version references in the README and changelog will be advanced together.
+The documentation checkpoint is intentionally separate from source synchronization so the public source tree is never partially replaced.
