@@ -1,22 +1,22 @@
-## Current development checkpoint — GNP/1 M2.8.4.4 fix23 (physically validated 2026-10-03)
+## Current development checkpoint — GNP/1 M2.8.4.5 Cancel / Retry (physically validated 2026-10-06)
 
-Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.4 Print Job Lifecycle / Error Recovery · fix23**.
+Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.5 Cancel / Retry**.
 
 Validated on the Android → trusted Windows gateway → Samsung SCX-4300 path:
 - authenticated remote printer discovery and print submission;
-- M2.8.4.3 TXT backend with UTF-8, real TAB stops, wrapping and multi-page pagination;
-- image/PDF/Office print paths and compact icon/tile print settings;
-- opt-in authenticated lifecycle V5 status transport with conservative `Queued / Printing / AttentionRequired / Completed / Cancelled / Failed / Unknown` semantics;
-- read-only Windows status observation through System.Printing, Win32 printer/job status, spooler change notifications and bounded Bidi probing;
-- conservative fallback **«Передано принтеру · физический статус принтера недоступен»** when an old driver removes a job before physical completion can be proven;
-- fix21 precedence correction so `PRINTED + DELETING` is not misreported as a user cancellation;
-- fix23 ordered Android foreground-service cleanup: the temporary **«Отправка файла / Печать…»** notification now disappears after the terminal print result, while the separate **«Genia Link · Готов к приёму»** availability notification remains.
+- explicit authenticated Cancel / Retry with JobId + authenticated-device ownership;
+- pre-spool cancellation for JPG/PNG image jobs and PDF jobs;
+- DOCX cancellation during Office preparation and inside a full 3000 ms post-preparation pre-spool window;
+- repeated **Cancel → Retry → Cancel** cycles with preserved document and print settings;
+- fail-closed late cancellation: when the exact spooler job can no longer be proven, cancellation is not confirmed and retry is suppressed;
+- conservative M2.8.4.4 lifecycle semantics remain intact for legacy drivers that remove jobs before physical completion can be proven;
+- Windows and Android security/build gates passed on the target toolchain, including the M2.8.4.5 fix7/fix8 checks.
 
-The Samsung SCX-4300 is a useful legacy-driver baseline: it can accept and physically print jobs while exposing no reliable paper-out/jam completion signal through the tested standard Windows channels. Genia Link therefore does not synthesize physical success. More printers, including newer models, are planned for compatibility testing.
+See [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md) and [current development status](docs/DEVELOPMENT_STATUS.md).
 
-**Next development step:** M2.8.4.5 Cancel / Retry — explicit user cancellation and convenient retry while preserving the selected file and print settings.
+**Next development step:** continue the M2.8 print-service line from this validated checkpoint and expand physical compatibility testing without changing the proven Cancel / Retry contract.
 
-> Repository note: this update records the physically validated development state. A full source-tree synchronization from the tested fix23 package is kept separate from documentation changes so the public tree is never partially replaced.
+> Repository note: this update records the physically validated development state. The public source tree on `main` remains the older M2.6.2 snapshot until a deliberate full source synchronization is prepared and revalidated as a whole.
 
 # Genia Link
 
@@ -54,13 +54,16 @@ Genia Link is a local-first device link for trusted file exchange between Window
 
 The public source snapshot on `main` remains **v0.3.1 RC4 / GNP/1 M2.6.2**. Active development has progressed further and is being validated before the next source synchronization.
 
-As of **2026-09-27**:
+As of **2026-10-06**:
 
 - **GNP/1 M2.7** — large-batch/concurrent transfer and resume/history UX checkpoint completed in the development line.
 - **GNP/1 M2.8.1 Print Service Foundation** — physical end-to-end printing verified: Android → authenticated GNP/1 session → Windows Print Gateway → physical printer.
 - **GNP/1 M2.8.2 PDF Printing** — PDF printing verified on a **Samsung SCX-4300 Series**, including a scaling fix that now matches the physical scale of direct Windows printing on the same printer.
 - **GNP/1 M2.8.3 Windows Remote Print Client** — physical Windows → authenticated GNP/1 → Windows Print Gateway → Samsung SCX-4300 printing verified; image `ActualSize` was also checked with a 50 × 50 mm calibration target and matched direct Windows printing.
-- **GNP/1 M2.8.4 Office Document Print Bridge** — development implementation now accepts validated macro-free DOCX/XLSX/PPTX and renders locally to PDF. The backend preference is Microsoft Office → LibreOffice → Apache OpenOffice; the compatible-suite path is implemented but still requires build/runtime/physical validation before this checkpoint is marked passed.
+- **GNP/1 M2.8.4 Office Document Print Bridge** — Microsoft Office path is physically validated for macro-free Office documents; LibreOffice/OpenOffice fallback remains implemented but is not yet physically validated.
+- **GNP/1 M2.8.4.3 TXT backend** — physically validated with UTF-8, real TAB stops, wrapping and multi-page pagination.
+- **GNP/1 M2.8.4.4 Lifecycle / Error Recovery** — physically validated with conservative completion semantics and fix23 Android notification cleanup.
+- **GNP/1 M2.8.4.5 Cancel / Retry** — **physical + security PASS**: early pre-spool cancellation for image/PDF, Office preparation-aware DOCX cancellation, explicit retry with preserved settings, and fail-closed late cancellation.
 - Printing reuses the existing trusted GNP/1 session; no separate unauthenticated print port is introduced.
 - `PrinterGateway` discovery does not itself grant trust or print authorization.
 
