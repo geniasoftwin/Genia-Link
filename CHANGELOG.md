@@ -1,3 +1,17 @@
+## GNP/1 M2.8.4.5 Cancel / Retry — physical + security checkpoint — 2026-10-06
+
+- Physically validated explicit authenticated Cancel / Retry on Android → trusted Windows PrinterGateway → Samsung SCX-4300.
+- Verified early cancellation before Windows spooler handoff for JPG/PNG image jobs and PDF jobs.
+- Verified DOCX cancellation both during Office preparation and inside the full 3000 ms post-preparation pre-spool cancellation window.
+- Verified repeated **Cancel → Retry → Cancel** cycles while preserving the selected document and print settings.
+- Retry remains explicit and uses a new JobId; no automatic retry was added.
+- Late cancellation fails closed when the exact spooler job/marker can no longer be proven; retry is suppressed to avoid duplicate printing.
+- The legacy SCX-4300 lifecycle limitation remains conservative: disappearance from the Windows queue is not synthesized as physical completion.
+- Windows SecurityCheck and Android SecurityCheck both passed, including analyzers/warnings-as-errors, protocol/security self-tests, Android build, zero third-party PackageReference checks, offline risky/cloud API scan, and the M2.8.4.5 fix7/fix8 gates.
+- Temporary diagnostic tracing used during network localization was removed from the checkpoint while useful lifecycle/cancel events remain.
+- Detailed checkpoint: `docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md`.
+- Public `main` source remains the older M2.6.2 snapshot until a deliberate full source synchronization is prepared and revalidated.
+
 ## GNP/1 M2.8.4.4 fix23 — physical validation checkpoint — 2026-10-03
 
 - Physically validated Android → trusted Windows PrinterGateway → Samsung SCX-4300 remote printing on the fix23 package.
