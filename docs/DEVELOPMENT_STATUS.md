@@ -31,7 +31,7 @@ The active development line has advanced beyond the public M2.6.2 snapshot.
 
 Detailed M2.8.4.5 checkpoint: [Cancel / Retry](GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md).
 
-Public product/design/security context: [User Flow](USER_FLOW.md) · [Validation & Compatibility Matrix](VALIDATION_MATRIX.md) · [Architecture overview](ARCHITECTURE.md) · [GNP/1 Specification](GNP1_SPEC.md) · [Threat model](THREAT_MODEL.md) · [Protocol notes](PROTOCOL.md).
+Public product/design/security context: [Product & Dependency Principles](PRODUCT_PRINCIPLES.md) · [User Flow](USER_FLOW.md) · [Validation & Compatibility Matrix](VALIDATION_MATRIX.md) · [Architecture overview](ARCHITECTURE.md) · [GNP/1 Specification](GNP1_SPEC.md) · [Threat model](THREAT_MODEL.md) · [Protocol notes](PROTOCOL.md).
 
 ## Print Service security model
 
