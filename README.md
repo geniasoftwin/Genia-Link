@@ -92,6 +92,12 @@ As of **2026-10-06**:
 
 See [current development status](docs/DEVELOPMENT_STATUS.md) for the distinction between the public snapshot and newer validated development checkpoints.
 
+## Engineering principle: minimal mandatory dependencies
+
+Genia Link prefers **minimal mandatory dependencies**: core local capabilities should not require unrelated helper applications, third-party accounts or cloud services when they can reasonably be implemented safely and maintainably inside the product or through the target OS. Optional integrations may improve fidelity or compatibility without becoming the only path to the feature.
+
+See [Product & Dependency Principles](docs/PRODUCT_PRINCIPLES.md).
+
 ## Local-only networking model
 
 Genia Link is designed to transfer user files directly between trusted devices on the local network. The application source does not use HTTP clients, cloud relay APIs, analytics SDKs, advertising SDKs, or external application servers for the transfer path.
