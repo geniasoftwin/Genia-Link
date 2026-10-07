@@ -25,6 +25,18 @@ The newer M2.7/M2.8 checkpoints are documented publicly, but the full correspond
 
 > **Development status:** release-candidate / protocol-development checkpoint. Interfaces, packaging, and GNP/1 details may change before a stable release.
 
+## Product flow
+
+> **Concept UI:** the visual below shows the intended information hierarchy and user journey. It is **not a screenshot of the current build**. Implementation/validation status is documented separately so concept visuals are never presented as shipped behavior.
+
+<p align="center">
+  <img src="branding/web/print-flow-concept.svg" alt="Genia Link concept UI: local discovery, SAS pairing, authenticated capabilities, trusted printing and fail-closed Cancel / Retry" width="100%" />
+</p>
+
+**Discover → Pair with SAS → authenticate the trusted device → use verified capabilities → transfer/print → explicit Cancel / Retry.**
+
+See the [User Flow](docs/USER_FLOW.md) for the step-by-step explanation and the [Validation & Compatibility Matrix](docs/VALIDATION_MATRIX.md) for a clear distinction between **PUBLIC**, **PHYSICAL PASS**, **IMPLEMENTED / NOT PHYSICALLY VALIDATED**, and **PLANNED** behavior.
+
 ## Current development checkpoint — GNP/1 M2.8.4.5 Cancel / Retry (physically validated 2026-10-06)
 
 Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.5 Cancel / Retry**.
