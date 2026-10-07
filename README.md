@@ -110,6 +110,8 @@ The projects target **.NET 10**. Windows builds require the Windows desktop tool
 For the exact current development workflow and RC4 test notes, see:
 
 - [Architecture overview](docs/ARCHITECTURE.md)
+- [GNP/1 Specification](docs/GNP1_SPEC.md)
+- [GNP/1 deterministic test vectors](docs/GNP1_TEST_VECTORS.md)
 - [Threat model](docs/THREAT_MODEL.md)
 - [Development notes (Russian)](docs/DEVELOPMENT_NOTES_RU.md)
 - [Protocol notes](docs/PROTOCOL.md)
