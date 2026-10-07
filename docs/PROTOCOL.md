@@ -1,5 +1,7 @@
 ﻿# Genia Link protocol v3
 
+> Public specification: [GNP/1 Specification — Draft 0.1](GNP1_SPEC.md) · [Deterministic test vectors](GNP1_TEST_VECTORS.md). This file remains the implementation/development notes companion and may contain historical checkpoint detail beyond the formalized public draft.
+
 Protocol v3 работает только в локальной IPv4-сети и добавляет resumable transfer и относительный каталог файла.
 
 ## Endpoints
