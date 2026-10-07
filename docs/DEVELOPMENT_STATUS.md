@@ -1,6 +1,6 @@
 # Genia Link Development Status
 
-_Last updated: 2026-10-06_
+_Last updated: 2026-10-07_
 
 This page separates the **public source snapshot currently stored on `main`** from newer development packages that have been physically validated before a deliberate source synchronization.
 
@@ -30,6 +30,8 @@ The active development line has advanced beyond the public M2.6.2 snapshot.
 | GNP/1 M2.8.4.5 | **Physical + security PASS** | Authenticated Cancel / Retry; pre-spool cancel for image/PDF; Office preparation-aware DOCX cancel; explicit retry with preserved settings; fail-closed late cancel |
 
 Detailed M2.8.4.5 checkpoint: [Cancel / Retry](GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md).
+
+Public design/security context: [Architecture overview](ARCHITECTURE.md) · [Threat model](THREAT_MODEL.md) · [Protocol notes](PROTOCOL.md).
 
 ## Print Service security model
 
