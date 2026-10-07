@@ -1,12 +1,14 @@
-## M2.8.4.4 fix23 security checkpoint — 2026-10-03
+## M2.8.4.5 Cancel / Retry security checkpoint — 2026-10-06
 
-The physically validated fix23 development package keeps the existing local-only trust boundary: authenticated GNP/1 sessions, trusted PrinterGateway capability enforcement, SHA-256 staging, bounded print payloads and no HTTP/cloud/analytics path.
+The physically validated M2.8.4.5 development checkpoint keeps the existing local-only trust boundary and adds authenticated, fail-closed print cancellation.
 
-Print lifecycle observation is read-only. System.Printing, `GetPrinter(PRINTER_INFO_6)`, bounded `EnumJobs`, spooler change notifications and Bidi status probing are used only to observe local Windows state. Genia Link does not issue Bidi `Set`, `SetPrinter`, `SetJob` or automatic cancellation as part of M2.8.4.4.
+Cancel ownership is bound to the accepted JobId and authenticated remote DeviceId. Before Windows spooler submission, cancellation may stop local preparation; after submission, cancellation targets only the exact correlated Genia Link job. If the exact spooler job can no longer be proven, cancellation is reported as **not confirmed** and Retry is suppressed to avoid duplicate printing.
 
-When the installed driver cannot prove physical completion, Genia Link fails conservative rather than claiming success. The tested Samsung SCX-4300 can remove a job from the Windows queue before physical paper handling is known, so the client reports that the job was handed to the printer while physical status is unavailable.
+Office-document preparation remains cancellation-aware, including a bounded 3000 ms pre-spool window after preparation completes. Retry is explicit, preserves the selected document/settings, and uses a new JobId.
 
-fix23 changes Android foreground-notification ownership/cleanup only; it does not weaken trusted transport, printer authorization, staging limits or lifecycle authentication.
+The checkpoint retains authenticated GNP/1 sessions, PrinterGateway capability enforcement, SHA-256 staging, bounded print payloads and the conservative lifecycle behavior introduced in M2.8.4.4. It does not add HTTP/cloud/analytics, queue-wide cancellation or an unauthenticated print listener.
+
+See the [M2.8.4.5 checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md), [architecture overview](docs/ARCHITECTURE.md) and [threat model](docs/THREAT_MODEL.md).
 
 # Security Policy
 
