@@ -32,12 +32,23 @@ See [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY
 
 Genia Link is a local-first device link for trusted file exchange between Windows and Android devices. The current public source snapshot is **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**.
 
+## Repository status at a glance
+
+| Item | Status |
+| --- | --- |
+| Public source currently on `main` | **v0.3.1 RC4 / GNP/1 M2.6.2** |
+| Latest physically validated development checkpoint | **GNP/1 M2.8.4.5 Cancel / Retry** |
+| Network model | Local-first; custom UDP discovery + authenticated trusted transport |
+| License | **Source-available, All Rights Reserved; not open-source** |
+
+The newer M2.7/M2.8 checkpoints are documented publicly, but the full corresponding source tree has not yet been synchronized to `main`. This distinction is intentional so the repository never presents a partially replaced development tree as a complete checkpoint.
+
 > **Development status:** release-candidate / protocol-development checkpoint. Interfaces, packaging, and GNP/1 details may change before a stable release.
 
 ## Highlights
 
 - Direct device-to-device transfer on the local IPv4 network.
-- Automatic local discovery; no manual IP entry for normal use.
+- Automatic local discovery over custom UDP 47502, plus authenticated remembered-route recovery for trusted sleeping peers; remembered IP addresses never establish trust.
 - Explicit SAS pairing and persistent trusted device identity.
 - ECDH P-256 key agreement with per-session keys.
 - AES-256-GCM protected transfer frames.
@@ -77,6 +88,8 @@ Inbound TCP listeners may bind to local interfaces, but accepted peers are restr
 
 Android declares the platform `INTERNET` permission because Android requires it for TCP/UDP networking; this does not imply that Genia Link uses an Internet service.
 
+Genia Link does not depend on mDNS or SSDP for its normal discovery path. It uses its own bounded UDP discovery on port 47502. For an already trusted sleeping peer, the last cryptographically confirmed LAN endpoint may be retained as a route hint; the peer must still authenticate as the expected DeviceId before any trusted operation proceeds.
+
 ## Repository layout
 
 ```text
@@ -96,11 +109,14 @@ The projects target **.NET 10**. Windows builds require the Windows desktop tool
 
 For the exact current development workflow and RC4 test notes, see:
 
+- [Architecture overview](docs/ARCHITECTURE.md)
+- [Threat model](docs/THREAT_MODEL.md)
 - [Development notes (Russian)](docs/DEVELOPMENT_NOTES_RU.md)
 - [Protocol notes](docs/PROTOCOL.md)
 - [GNP/1 M2.6.2 checkpoint](docs/GNP1_MILESTONE2_6_2_AUTHENTICATED_CAPABILITIES.md)
 - [RC4 final test checklist](docs/RC4_FINAL_TEST.md)
 - [Security implementation notes](docs/SECURITY_IMPLEMENTATION.md)
+- [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md)
 
 ## Releases and changelog
 
