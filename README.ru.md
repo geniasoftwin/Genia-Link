@@ -110,6 +110,8 @@ branding/               Графика и заметки по брендингу
 Подробности текущего рабочего процесса:
 
 - [Обзор архитектуры](docs/ARCHITECTURE.md)
+- [Спецификация GNP/1](docs/GNP1_SPEC.md)
+- [Детерминированные test vectors GNP/1](docs/GNP1_TEST_VECTORS.md)
 - [Threat model](docs/THREAT_MODEL.md)
 - [Подробные заметки разработки](docs/DEVELOPMENT_NOTES_RU.md)
 - [Описание протокола](docs/PROTOCOL.md)
