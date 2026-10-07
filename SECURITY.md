@@ -8,7 +8,7 @@ Office-document preparation remains cancellation-aware, including a bounded 3000
 
 The checkpoint retains authenticated GNP/1 sessions, PrinterGateway capability enforcement, SHA-256 staging, bounded print payloads and the conservative lifecycle behavior introduced in M2.8.4.4. It does not add HTTP/cloud/analytics, queue-wide cancellation or an unauthenticated print listener.
 
-See the [M2.8.4.5 checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md), [architecture overview](docs/ARCHITECTURE.md) and [threat model](docs/THREAT_MODEL.md).
+See the [M2.8.4.5 checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md), [architecture overview](docs/ARCHITECTURE.md), [GNP/1 specification](docs/GNP1_SPEC.md), [deterministic test vectors](docs/GNP1_TEST_VECTORS.md) and [threat model](docs/THREAT_MODEL.md).
 
 # Security Policy
 
