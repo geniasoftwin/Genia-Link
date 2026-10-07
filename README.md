@@ -1,23 +1,3 @@
-## Current development checkpoint — GNP/1 M2.8.4.5 Cancel / Retry (physically validated 2026-10-06)
-
-Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.5 Cancel / Retry**.
-
-Validated on the Android → trusted Windows gateway → Samsung SCX-4300 path:
-- authenticated remote printer discovery and print submission;
-- explicit authenticated Cancel / Retry with JobId + authenticated-device ownership;
-- pre-spool cancellation for JPG/PNG image jobs and PDF jobs;
-- DOCX cancellation during Office preparation and inside a full 3000 ms post-preparation pre-spool window;
-- repeated **Cancel → Retry → Cancel** cycles with preserved document and print settings;
-- fail-closed late cancellation: when the exact spooler job can no longer be proven, cancellation is not confirmed and retry is suppressed;
-- conservative M2.8.4.4 lifecycle semantics remain intact for legacy drivers that remove jobs before physical completion can be proven;
-- Windows and Android security/build gates passed on the target toolchain, including the M2.8.4.5 fix7/fix8 checks.
-
-See [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md) and [current development status](docs/DEVELOPMENT_STATUS.md).
-
-**Next development step:** continue the M2.8 print-service line from this validated checkpoint and expand physical compatibility testing without changing the proven Cancel / Retry contract.
-
-> Repository note: this update records the physically validated development state. The public source tree on `main` remains the older M2.6.2 snapshot until a deliberate full source synchronization is prepared and revalidated as a whole.
-
 # Genia Link
 
 <p align="center">
@@ -44,6 +24,26 @@ Genia Link is a local-first device link for trusted file exchange between Window
 The newer M2.7/M2.8 checkpoints are documented publicly, but the full corresponding source tree has not yet been synchronized to `main`. This distinction is intentional so the repository never presents a partially replaced development tree as a complete checkpoint.
 
 > **Development status:** release-candidate / protocol-development checkpoint. Interfaces, packaging, and GNP/1 details may change before a stable release.
+
+## Current development checkpoint — GNP/1 M2.8.4.5 Cancel / Retry (physically validated 2026-10-06)
+
+Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.5 Cancel / Retry**.
+
+Validated on the Android → trusted Windows gateway → Samsung SCX-4300 path:
+- authenticated remote printer discovery and print submission;
+- explicit authenticated Cancel / Retry with JobId + authenticated-device ownership;
+- pre-spool cancellation for JPG/PNG image jobs and PDF jobs;
+- DOCX cancellation during Office preparation and inside a full 3000 ms post-preparation pre-spool window;
+- repeated **Cancel → Retry → Cancel** cycles with preserved document and print settings;
+- fail-closed late cancellation: when the exact spooler job can no longer be proven, cancellation is not confirmed and retry is suppressed;
+- conservative M2.8.4.4 lifecycle semantics remain intact for legacy drivers that remove jobs before physical completion can be proven;
+- Windows and Android security/build gates passed on the target toolchain, including the M2.8.4.5 fix7/fix8 checks.
+
+See [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md) and [current development status](docs/DEVELOPMENT_STATUS.md).
+
+**Next development step:** continue the M2.8 print-service line from this validated checkpoint and expand physical compatibility testing without changing the proven Cancel / Retry contract.
+
+> Repository note: this update records the physically validated development state. The public source tree on `main` remains the older M2.6.2 snapshot until a deliberate full source synchronization is prepared and revalidated as a whole.
 
 ## Highlights
 
