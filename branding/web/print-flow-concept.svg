@@ -1,0 +1,133 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Genia Link trusted print flow concept UI</title>
+  <desc id="desc">Conceptual product flow from local discovery and SAS pairing to trusted print submission and fail-closed cancel or retry.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f8fbff"/>
+      <stop offset="1" stop-color="#eef5ff"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="0" x2="1">
+      <stop offset="0" stop-color="#0b6ffb"/>
+      <stop offset="1" stop-color="#2f8cff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#17325c" flood-opacity=".12"/>
+    </filter>
+    <style>
+      .h1 { font: 700 42px Inter,Segoe UI,Arial,sans-serif; fill:#10213f; }
+      .h2 { font: 700 24px Inter,Segoe UI,Arial,sans-serif; fill:#10213f; }
+      .body { font: 400 18px Inter,Segoe UI,Arial,sans-serif; fill:#52627e; }
+      .small { font: 400 14px Inter,Segoe UI,Arial,sans-serif; fill:#6f7f98; }
+      .ui { font: 600 15px Inter,Segoe UI,Arial,sans-serif; fill:#172641; }
+      .muted { font: 400 13px Inter,Segoe UI,Arial,sans-serif; fill:#77869d; }
+      .white { fill:#fff; }
+      .green { fill:#19a66a; }
+      .red { fill:#e84b4b; }
+      .blueText { fill:#0b6ffb; }
+    </style>
+  </defs>
+
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <text x="70" y="68" class="h1">Genia Link — trusted local print flow</text>
+  <text x="70" y="104" class="body">Concept UI direction · not a screenshot of the current build</text>
+
+  <!-- arrows -->
+  <g fill="#b8d7ff">
+    <path d="M392 338 h54 l-16 -16 16 16 -16 16 16 -16 h-54 z"/>
+    <path d="M782 338 h54 l-16 -16 16 16 -16 16 16 -16 h-54 z"/>
+    <path d="M1172 338 h54 l-16 -16 16 16 -16 16 16 -16 h-54 z"/>
+  </g>
+
+  <!-- card 1 -->
+  <g filter="url(#shadow)">
+    <rect x="60" y="150" width="330" height="420" rx="28" fill="#fff"/>
+  </g>
+  <circle cx="102" cy="193" r="22" fill="url(#blue)"/><text x="95" y="201" font-size="22" font-weight="700" fill="#fff">1</text>
+  <text x="140" y="200" class="h2">Discover</text>
+  <text x="92" y="235" class="small">Custom local UDP discovery</text>
+  <rect x="88" y="270" width="274" height="72" rx="16" fill="#f5f8fd"/>
+  <rect x="105" y="290" width="34" height="24" rx="3" fill="none" stroke="#28415f" stroke-width="3"/>
+  <path d="M114 319 h16 M122 314 v5" stroke="#28415f" stroke-width="3"/>
+  <text x="155" y="298" class="ui">Office PC</text>
+  <text x="155" y="322" class="muted">Windows · PrinterGateway</text>
+  <circle cx="334" cy="305" r="7" class="green"/>
+  <rect x="88" y="357" width="274" height="72" rx="16" fill="#f5f8fd"/>
+  <rect x="105" y="377" width="34" height="24" rx="3" fill="none" stroke="#28415f" stroke-width="3"/>
+  <text x="155" y="385" class="ui">Laptop</text>
+  <text x="155" y="409" class="muted">Windows · FileTransfer</text>
+  <circle cx="334" cy="392" r="7" class="green"/>
+  <rect x="88" y="452" width="274" height="84" rx="16" fill="#edf6ff"/>
+  <text x="108" y="480" class="ui blueText">Discovery ≠ trust</text>
+  <text x="108" y="506" class="muted">IP/name never authorize a peer.</text>
+
+  <!-- card 2 -->
+  <g filter="url(#shadow)">
+    <rect x="450" y="150" width="330" height="420" rx="28" fill="#fff"/>
+  </g>
+  <circle cx="492" cy="193" r="22" fill="url(#blue)"/><text x="485" y="201" font-size="22" font-weight="700" fill="#fff">2</text>
+  <text x="530" y="200" class="h2">Pair with SAS</text>
+  <text x="482" y="235" class="small">Explicit first trust decision</text>
+  <text x="615" y="292" text-anchor="middle" class="muted">Confirm the same code on both devices</text>
+  <rect x="500" y="320" width="230" height="92" rx="18" fill="#f4f8ff"/>
+  <text x="615" y="380" text-anchor="middle" font-size="39" font-weight="750" fill="#10213f">900 201</text>
+  <rect x="500" y="440" width="230" height="54" rx="14" fill="url(#blue)"/>
+  <text x="615" y="474" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Confirm pairing</text>
+  <text x="615" y="528" text-anchor="middle" class="muted">ECDH P-256 · persistent identity</text>
+
+  <!-- card 3 -->
+  <g filter="url(#shadow)">
+    <rect x="840" y="150" width="330" height="420" rx="28" fill="#fff"/>
+  </g>
+  <circle cx="882" cy="193" r="22" fill="url(#blue)"/><text x="875" y="201" font-size="22" font-weight="700" fill="#fff">3</text>
+  <text x="920" y="200" class="h2">Trusted device</text>
+  <text x="872" y="235" class="small">Authenticated capabilities</text>
+  <circle cx="1005" cy="304" r="44" fill="#e9f8f1"/>
+  <path d="M985 304 l14 14 29 -31" fill="none" stroke="#19a66a" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="1005" y="372" text-anchor="middle" class="ui">Office PC is trusted</text>
+  <rect x="876" y="398" width="258" height="44" rx="12" fill="#f5f8fd"/>
+  <text x="896" y="426" class="ui">✓ File transfer</text>
+  <rect x="876" y="452" width="258" height="44" rx="12" fill="#f5f8fd"/>
+  <text x="896" y="480" class="ui">✓ Printer gateway</text>
+  <rect x="876" y="506" width="258" height="40" rx="12" fill="#edf6ff"/>
+  <text x="896" y="531" class="muted">Capability does not create trust.</text>
+
+  <!-- card 4 -->
+  <g filter="url(#shadow)">
+    <rect x="1230" y="150" width="310" height="420" rx="28" fill="#fff"/>
+  </g>
+  <circle cx="1272" cy="193" r="22" fill="url(#blue)"/><text x="1265" y="201" font-size="22" font-weight="700" fill="#fff">4</text>
+  <text x="1310" y="200" class="h2">Print</text>
+  <text x="1262" y="235" class="small">Send to trusted Windows gateway</text>
+  <rect x="1260" y="270" width="250" height="62" rx="14" fill="#f5f8fd"/>
+  <text x="1280" y="298" class="ui">Project_Plan.pdf</text>
+  <text x="1280" y="319" class="muted">2.4 MB · 12 pages</text>
+  <text x="1260" y="370" class="muted">Printer</text>
+  <rect x="1260" y="384" width="250" height="48" rx="12" fill="#f5f8fd"/>
+  <text x="1280" y="414" class="ui">Samsung SCX-4300</text>
+  <circle cx="1485" cy="408" r="7" class="green"/>
+  <text x="1260" y="466" class="muted">Settings preserved for explicit Retry</text>
+  <rect x="1260" y="492" width="250" height="54" rx="14" fill="url(#blue)"/>
+  <text x="1385" y="526" text-anchor="middle" font-size="17" font-weight="700" fill="#fff">Print</text>
+
+  <!-- desktop lifecycle -->
+  <g filter="url(#shadow)">
+    <rect x="120" y="630" width="1360" height="205" rx="26" fill="#fff"/>
+  </g>
+  <text x="158" y="674" class="h2">Authenticated print-job lifecycle</text>
+  <text x="158" y="705" class="small">Validated development checkpoint M2.8.4.5 · Cancel / Retry fails closed</text>
+  <rect x="160" y="740" width="280" height="62" rx="15" fill="#edf6ff"/>
+  <text x="180" y="765" class="ui">Queued / Printing</text>
+  <text x="180" y="787" class="muted">Exact JobId + remote owner</text>
+  <path d="M460 771 h120" stroke="#bdd8fb" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="580,771 564,759 564,783" fill="#bdd8fb"/>
+  <rect x="605" y="740" width="280" height="62" rx="15" fill="#fff3f3"/>
+  <text x="625" y="765" class="ui red">Cancel requested</text>
+  <text x="625" y="787" class="muted">Pre-spool or exact spooler job</text>
+  <path d="M905 771 h120" stroke="#bdd8fb" stroke-width="8" stroke-linecap="round"/>
+  <polygon points="1025,771 1009,759 1009,783" fill="#bdd8fb"/>
+  <rect x="1050" y="740" width="380" height="62" rx="15" fill="#edf9f3"/>
+  <text x="1070" y="765" class="ui">Confirmed cancel → explicit Retry</text>
+  <text x="1070" y="787" class="muted">Unconfirmed cancel → Retry suppressed</text>
+
+  <text x="800" y="872" text-anchor="middle" class="small">Local-first · authenticated transport · no separate unauthenticated print port</text>
+</svg>
