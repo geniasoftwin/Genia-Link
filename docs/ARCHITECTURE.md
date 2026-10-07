@@ -147,6 +147,16 @@ A peer may advertise capabilities such as trusted discovery, trusted transport, 
 
 This model is intended to keep future services additive rather than weakening the base transfer/trust contract.
 
+## Dependency policy
+
+Genia Link follows a **minimal mandatory dependency** principle.
+
+Core advertised capabilities should not depend on separately installed helper products, third-party accounts or cloud services when the same function can reasonably be implemented safely, locally and maintainably inside the product or through the target operating system.
+
+Optional integrations may improve fidelity or compatibility, but they should enhance the baseline rather than define it. For example, Microsoft Office may remain an optional high-fidelity renderer for Office documents while a future self-contained document engine provides the baseline path for a Pro-class edition.
+
+See [Product & Dependency Principles](PRODUCT_PRINCIPLES.md).
+
 ## Compatibility strategy
 
 GNP/1 development favors additive extensions and explicit capability negotiation where possible. Older peers should not gain authority simply because a newer peer understands more message types.
@@ -155,6 +165,7 @@ Security-sensitive compatibility rules fail closed: unknown authority, identity 
 
 ## Related documents
 
+- [Product & Dependency Principles](PRODUCT_PRINCIPLES.md)
 - [Protocol notes](PROTOCOL.md)
 - [Threat model](THREAT_MODEL.md)
 - [Security implementation notes](SECURITY_IMPLEMENTATION.md)
