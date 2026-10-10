@@ -31,8 +31,11 @@ The active development line has advanced beyond the public M2.6.2 snapshot.
 | GNP/1 M2.8.5.1 | Functional + physical regression observed in dev | Printer Capability V3 inventory on Samsung SCX-4300, PDF print and Cancel / Retry smoke test |
 | GNP/1 M2.8.5.2 | Functional UI observed in dev | Read-only detailed printer capability profile displayed in Android |
 | GNP/1 M2.8.5.3 | Partial physical validation in dev | Actual copies and DPI changes verified on SCX-4300; paper-format test and final security/build confirmation remain outstanding |
+| GNP/1 M2.9.2 build8 Remote Scan | **PHYSICAL PASS (2026-10-10)** | Two trusted Android build8 clients → Windows ScannerGateway build7: single-page 300 dpi WIA to verified JPEG; exclusive scanner access, Android `Busy` UX; screen stays on during active scanning at 15/30 s timeouts. No claim of full M2.9.2 security/build PASS |
 
 Detailed M2.8.4.5 checkpoint: [Cancel / Retry](GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md).
+
+Detailed M2.9.2 physical checkpoint: [Remote Scan / Android Scan Stability build8](GNP1_M2_9_2_REMOTE_SCAN_BUILD8.md). The tested Windows gateway remains build7; the Android clients were updated to build8. Manual screen lock, background operation, auto-queueing, scan cancellation, and multipage/ADF/PDF scanning are not validated by this checkpoint.
 
 Public product/design/security context: [Product & Dependency Principles](PRODUCT_PRINCIPLES.md) · [User Flow](USER_FLOW.md) · [Validation & Compatibility Matrix](VALIDATION_MATRIX.md) · [Architecture overview](ARCHITECTURE.md) · [GNP/1 Specification](GNP1_SPEC.md) · [Threat model](THREAT_MODEL.md) · [Protocol notes](PROTOCOL.md).
 
@@ -57,19 +60,19 @@ Physical tests covered repeated Cancel → Retry → Cancel cycles on DOCX, PDF 
 ## Planned next steps
 
 1. Finish the outstanding M2.8.5.3 print settings checks and freeze the actual selected source package (do not infer full security PASS from UI screenshots).
-2. Start [M2.9 Scanner Service Foundation](GNP1_M2_9_SCANNER_PLAN.md) with a read-only WIA scanner-driver probe and a locally initiated single-page scan.
-3. After the scanner MVP, implement authenticated remote scanning and preview; only then multipage / ADF / PDF support where observed.
+2. Maintain the physically tested M2.9.2 single-page remote-scan baseline; separately test manual screen lock/background execution, transport loss, recovery and targeted cancellation.
+3. Plan M2.9.3 scanner-job management (optional explicit user-confirmed queue, device-scoped result ownership, bounded retry); only then broaden multipage / ADF / PDF support where observed.
 4. Add [Russian/English localization](LOCALIZATION_PLAN.md) with system-default selection, persistent manual override and a unified Windows/Android design system.
 5. Broaden compatibility tests and prepare a deliberate public source synchronization beyond M2.6.2 only after packaging and revalidating a complete development checkpoint.
 
 ## Roadmap boundary
 
-Scanner, localization, peer-assisted reachability and related future capabilities remain **PLANNED** unless explicitly implemented and validated. They are not included in the public M2.6.2 source snapshot.
+**M2.9.2 single-page Remote Scan** is physically validated only for the tested development configuration described above. Unvalidated scanner extensions, localization, peer-assisted reachability and related future capabilities remain **PLANNED** unless separately implemented and tested. None of M2.9.2 is included in the public M2.6.2 source snapshot.
 
 The scanner plan explicitly requires a locally installed WIA-compatible scanner driver on the Windows gateway where appropriate, but no Microsoft Office or Genia Link cloud service.
 
 ## Publication note
 
-The milestones above describe **validated development progress**, not a claim that the corresponding M2.7/M2.8 source has already been synchronized to the public `main` branch.
+The milestones above describe **validated development progress**, not a claim that corresponding M2.7/M2.8/M2.9 source has already been synchronized to the public `main` branch.
 
 The documentation checkpoint is intentionally separate from source synchronization so the public source tree is never partially replaced.
