@@ -28,12 +28,12 @@
 | One-page remote scanning via Windows ScannerGateway → Android JPEG | **PHYSICAL PASS · DEV BUILD** | M2.9.2; Windows build7, two Android build8 clients |
 | Automatic scan queue, manual screen-lock/background scan, ADF/multipage/PDF | **NOT VALIDATED** | Future work, not in public source |
 
-**PUBLIC SOURCE** = currently available source code on \`main\`. **PHYSICAL PASS** = a specific scenario tested on real devices in a separate development build, not a downloadable release. See the [Validation Matrix](docs/VALIDATION_MATRIX.md) and [Development Status](docs/DEVELOPMENT_STATUS.md).
+**PUBLIC SOURCE** = currently available source code on `main`. **PHYSICAL PASS** = a specific scenario tested on real devices in a separate development build, not a downloadable release. See the [Validation Matrix](docs/VALIDATION_MATRIX.md) and [Development Status](docs/DEVELOPMENT_STATUS.md).
 
 ## Download and quick start
 
 - **Public source release:** [v0.3.1 RC4 / GNP/1 M2.6.2](https://github.com/geniasoftwin/Genia-Link/releases/tag/v0.3.1-rc4-m2.6.2) — a **source checkpoint only**, with no attached EXE or APK installers.
-- **Build it:** requires **.NET 10** and the appropriate Windows Desktop / .NET for Android toolchains. See [build prerequisites](#build-prerequisites), the \`scripts/\` folder, and the [RC4 checklist](docs/RC4_FINAL_TEST.md).
+- **Build it:** requires **.NET 10** and the appropriate Windows Desktop / .NET for Android toolchains. See [build prerequisites](#build-prerequisites), the `scripts/` folder, and the [RC4 checklist](docs/RC4_FINAL_TEST.md).
 - **Connect:** launch the two clients on the same local network, discover the peer, compare and confirm the pairing code on both devices, then transfer files. See [User Flow](docs/USER_FLOW.md).
 - **Printing and scanning:** the tested development Windows gateway relies on locally installed printer/scanner drivers. These newer builds are **not included in the public M2.6.2 release**.
 
