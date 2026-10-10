@@ -1,6 +1,6 @@
 # Genia Link Validation & Compatibility Matrix
 
-_Last updated: 2026-10-07_
+_Last updated: 2026-10-10_
 
 This matrix answers a simple question: **what is actually public, what has been physically validated, and what still needs testing?**
 
@@ -45,6 +45,25 @@ This matrix answers a simple question: **what is actually public, what has been 
 | Office-preparation-aware early cancel | **PHYSICAL PASS** | DOCX repeated Cancel → Retry → Cancel |
 | Late cancel after exact job is no longer provable | **PHYSICAL PASS** | Fail-closed; Retry suppressed |
 
+## Remote Scan development line — M2.9.2
+
+**Tested configuration:** trusted Windows ScannerGateway **build7** and **two Android clients build8**. The public `main` branch does **not** yet include this source.
+
+| Path / feature | Validation | Notes |
+| --- | --- | --- |
+| Authenticated Windows scanner inventory from Android | **PHYSICAL PASS** | Both phones found the scanner via the trusted gateway |
+| One-page 300 dpi WIA → bounded BMP-to-JPEG → Android | **PHYSICAL PASS** | Verified JPEG reception in device logs |
+| Repeated scans | **PHYSICAL PASS** | Multiple sequential verified JPEG results without observed gateway restart |
+| Two clients / exclusive scanner access | **PHYSICAL PASS** | One WIA acquisition at a time; overlapping requests receive `Busy` |
+| Android busy-message UX | **PHYSICAL PASS** | Clear “Сканер занят другим заданием” message shown in UI |
+| Android scan display wake protection | **PHYSICAL PASS** | Screen remained on through active scans, with system timeouts 15 and 30 seconds |
+| Manual screen lock / app backgrounding | **NOT VALIDATED** | No foreground-service/background-scanning guarantee |
+| Scan cancellation, automatic job queue | **NOT VALIDATED** | Candidate for later milestone, not part of this PASS |
+| ADF/multipage and PDF output | **NOT VALIDATED** | No compatibility claim from one-page JPEG testing |
+| Full M2.9.2 Windows + Android security/build gate | **NOT CONFIRMED** | Physical success and one reported Android Share/Resume check do not establish the full gate |
+
+Checkpoint report: [M2.9.2 Remote Scan build8](GNP1_M2_9_2_REMOTE_SCAN_BUILD8.md).
+
 ## Physical printer baseline
 
 | Device / driver class | Status | What it proves |
@@ -60,7 +79,7 @@ No generic claim of compatibility with every Windows printer is made from the si
 
 The M2.8.4.5 checkpoint has passed the project's Windows and Android build/security gates on the target development toolchain.
 
-The public repository still contains the older M2.6.2 source snapshot. The validation statements above describe the newer development checkpoint and are not a claim that all M2.8 source has already been published on `main`.
+The public repository still contains the older M2.6.2 source snapshot. The validation statements above describe newer development checkpoints and are not a claim that all M2.8 or M2.9 source has been published on `main`.
 
 ## Next compatibility checkpoint
 

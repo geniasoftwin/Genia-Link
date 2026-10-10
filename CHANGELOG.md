@@ -1,3 +1,14 @@
+## GNP/1 M2.9.2 Remote Scan build8 — physical checkpoint — 2026-10-10
+
+- Physically validated single-page 300 dpi remote scanning via a trusted Windows ScannerGateway **build7** and **two Android clients build8**.
+- Windows WIA returned BMP data, normalized to bounded JPEG; authenticated scan-result transfers yielded verified JPEG reception on Android.
+- Two-client race testing demonstrated exclusive WIA acquisition: competing requests received explicit `Busy`, and each phone later completed a verified scan.
+- Android build8 displays a human-readable “scanner busy” message instead of a generic error.
+- Android build8 kept the screen active during scan requests with configured system screen-off timeouts of **15 and 30 seconds**.
+- Manual lock/background execution, scan cancellation, automatic queue, multipage/ADF, PDF output, and complete M2.9.2 security/build gate are **not validated** by this test.
+- Development checkpoint details: `docs/GNP1_M2_9_2_REMOTE_SCAN_BUILD8.md`.
+- **Documentation-only:** public `main` still contains the older M2.6.2 source snapshot, not the validated build7/build8 ScannerGateway/Android sources.
+
 ## GNP/1 M2.8.4.5 Cancel / Retry — physical + security checkpoint — 2026-10-06
 
 - Physically validated explicit authenticated Cancel / Retry on Android → trusted Windows PrinterGateway → Samsung SCX-4300.
