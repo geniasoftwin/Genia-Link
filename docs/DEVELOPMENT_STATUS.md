@@ -1,6 +1,6 @@
 # Genia Link Development Status
 
-_Last updated: 2026-10-07_
+_Last updated: 2026-10-10_
 
 This page separates the **public source snapshot currently stored on `main`** from newer development packages that have been physically validated before a deliberate source synchronization.
 
@@ -28,6 +28,9 @@ The active development line has advanced beyond the public M2.6.2 snapshot.
 | GNP/1 M2.8.4.3 | Physical TXT backend passed | UTF-8, real TAB stops, wrapping and multi-page pagination |
 | GNP/1 M2.8.4.4 | Physical lifecycle/error-recovery passed | Conservative Queued/Printing/Unknown lifecycle semantics; fix23 Android foreground-notification cleanup |
 | GNP/1 M2.8.4.5 | **Physical + security PASS** | Authenticated Cancel / Retry; pre-spool cancel for image/PDF; Office preparation-aware DOCX cancel; explicit retry with preserved settings; fail-closed late cancel |
+| GNP/1 M2.8.5.1 | Functional + physical regression observed in dev | Printer Capability V3 inventory on Samsung SCX-4300, PDF print and Cancel / Retry smoke test |
+| GNP/1 M2.8.5.2 | Functional UI observed in dev | Read-only detailed printer capability profile displayed in Android |
+| GNP/1 M2.8.5.3 | Partial physical validation in dev | Actual copies and DPI changes verified on SCX-4300; paper-format test and final security/build confirmation remain outstanding |
 
 Detailed M2.8.4.5 checkpoint: [Cancel / Retry](GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md).
 
@@ -53,10 +56,17 @@ Physical tests covered repeated Cancel → Retry → Cancel cycles on DOCX, PDF 
 
 ## Planned next steps
 
-1. Freeze M2.8.4.5 as the validated Cancel / Retry baseline.
-2. Continue the M2.8 print-service line from this checkpoint without modifying the validated Cancel / Retry contract unless a regression requires it.
-3. Expand physical compatibility testing to additional printer/driver models, including newer devices with richer status reporting.
-4. Prepare a deliberate full public source synchronization beyond M2.6.2 only after the selected development checkpoint is packaged and revalidated as a whole.
+1. Finish the outstanding M2.8.5.3 print settings checks and freeze the actual selected source package (do not infer full security PASS from UI screenshots).
+2. Start [M2.9 Scanner Service Foundation](GNP1_M2_9_SCANNER_PLAN.md) with a read-only WIA scanner-driver probe and a locally initiated single-page scan.
+3. After the scanner MVP, implement authenticated remote scanning and preview; only then multipage / ADF / PDF support where observed.
+4. Add [Russian/English localization](LOCALIZATION_PLAN.md) with system-default selection, persistent manual override and a unified Windows/Android design system.
+5. Broaden compatibility tests and prepare a deliberate public source synchronization beyond M2.6.2 only after packaging and revalidating a complete development checkpoint.
+
+## Roadmap boundary
+
+Scanner, localization, peer-assisted reachability and related future capabilities remain **PLANNED** unless explicitly implemented and validated. They are not included in the public M2.6.2 source snapshot.
+
+The scanner plan explicitly requires a locally installed WIA-compatible scanner driver on the Windows gateway where appropriate, but no Microsoft Office or Genia Link cloud service.
 
 ## Publication note
 
