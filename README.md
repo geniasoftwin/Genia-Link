@@ -17,7 +17,7 @@ Genia Link is a local-first device link for trusted file exchange between Window
 | Item | Status |
 | --- | --- |
 | Public source currently on `main` | **v0.3.1 RC4 / GNP/1 M2.6.2** |
-| Latest physically validated development checkpoint | **GNP/1 M2.8.4.5 Cancel / Retry** |
+| Latest physically validated development checkpoint | **GNP/1 M2.9.2 Remote Scan build8** (Windows gateway build7 + Android build8) |
 | Network model | Local-first; custom UDP discovery + authenticated trusted transport |
 | License | **Source-available, All Rights Reserved; not open-source** |
 
@@ -37,9 +37,22 @@ The newer M2.7/M2.8 checkpoints are documented publicly, but the full correspond
 
 See the [User Flow](docs/USER_FLOW.md) for the step-by-step explanation and the [Validation & Compatibility Matrix](docs/VALIDATION_MATRIX.md) for a clear distinction between **PUBLIC**, **PHYSICAL PASS**, **IMPLEMENTED / NOT PHYSICALLY VALIDATED**, and **PLANNED** behavior.
 
-## Current development checkpoint — GNP/1 M2.8.4.5 Cancel / Retry (physically validated 2026-10-06)
+## Latest development checkpoint — GNP/1 M2.9.2 Remote Scan build8 (physical PASS 2026-10-10)
 
-Genia Link development has advanced beyond the older public M2.6.2 source snapshot. The current tested package is **v0.3.1 RC4 · GNP/1 M2.8.4.5 Cancel / Retry**.
+Remote scanning is now physically validated on a **trusted Windows ScannerGateway (build7)** and **two Android clients (build8)** over the existing authenticated local GNP/1 transport. The physical test confirmed:
+
+- Repeated one-page 300 dpi WIA acquisitions, bounded BMP-to-JPEG normalization, and verified JPEG receipt on Android.
+- Exclusive scanner access with a typed `Busy` response when a second trusted phone requests an already-busy scanner.
+- Clear Android “scanner busy” UI, and subsequent successful scans for each phone once the scanner becomes available.
+- Active Android scan keeps the display on even with the system screen timeout set to **15 or 30 seconds**.
+
+**Limitations:** manual screen lock/background execution, an automatic scanner job queue, explicit scan cancellation, multipage/ADF, and PDF output are **not validated** by this checkpoint. A full M2.9.2 security/build gate is not claimed by the physical tests.
+
+See [M2.9.2 Remote Scan physical validation checkpoint](docs/GNP1_M2_9_2_REMOTE_SCAN_BUILD8.md) and [Validation Matrix](docs/VALIDATION_MATRIX.md).
+
+## Earlier print checkpoint — GNP/1 M2.8.4.5 Cancel / Retry (physically validated 2026-10-06)
+
+Genia Link development has advanced beyond the older public M2.6.2 source snapshot. An earlier tested package was **v0.3.1 RC4 · GNP/1 M2.8.4.5 Cancel / Retry**.
 
 Validated on the Android → trusted Windows gateway → Samsung SCX-4300 path:
 - authenticated remote printer discovery and print submission;
@@ -53,7 +66,7 @@ Validated on the Android → trusted Windows gateway → Samsung SCX-4300 path:
 
 See [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md) and [current development status](docs/DEVELOPMENT_STATUS.md).
 
-**Next development step:** continue the M2.8 print-service line from this validated checkpoint and expand physical compatibility testing without changing the proven Cancel / Retry contract.
+The M2.8.4.5 print milestone remains a validated historical checkpoint; the later Remote Scan checkpoint is documented above.
 
 > Repository note: this update records the physically validated development state. The public source tree on `main` remains the older M2.6.2 snapshot until a deliberate full source synchronization is prepared and revalidated as a whole.
 
@@ -77,7 +90,7 @@ See [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY
 
 The public source snapshot on `main` remains **v0.3.1 RC4 / GNP/1 M2.6.2**. Active development has progressed further and is being validated before the next source synchronization.
 
-As of **2026-10-06**:
+As of **2026-10-10**:
 
 - **GNP/1 M2.7** — large-batch/concurrent transfer and resume/history UX checkpoint completed in the development line.
 - **GNP/1 M2.8.1 Print Service Foundation** — physical end-to-end printing verified: Android → authenticated GNP/1 session → Windows Print Gateway → physical printer.
@@ -87,6 +100,7 @@ As of **2026-10-06**:
 - **GNP/1 M2.8.4.3 TXT backend** — physically validated with UTF-8, real TAB stops, wrapping and multi-page pagination.
 - **GNP/1 M2.8.4.4 Lifecycle / Error Recovery** — physically validated with conservative completion semantics and fix23 Android notification cleanup.
 - **GNP/1 M2.8.4.5 Cancel / Retry** — **physical + security PASS**: early pre-spool cancellation for image/PDF, Office preparation-aware DOCX cancellation, explicit retry with preserved settings, and fail-closed late cancellation.
+- **GNP/1 M2.9.2 Remote Scan build8** — **physical PASS**: two trusted Android clients use the Windows build7 ScannerGateway; exclusive WIA acquisition and `Busy` UX, verified single-page JPEG results, Android display stays on during scanning at 15/30 s screen timeouts. Not a public-source or full security-gate claim.
 - Printing reuses the existing trusted GNP/1 session; no separate unauthenticated print port is introduced.
 - `PrinterGateway` discovery does not itself grant trust or print authorization.
 
@@ -137,6 +151,7 @@ For the exact current development workflow and RC4 test notes, see:
 - [RC4 final test checklist](docs/RC4_FINAL_TEST.md)
 - [Security implementation notes](docs/SECURITY_IMPLEMENTATION.md)
 - [M2.8.4.5 Cancel / Retry checkpoint](docs/GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md)
+- [M2.9.2 Remote Scan build8 physical checkpoint](docs/GNP1_M2_9_2_REMOTE_SCAN_BUILD8.md)
 
 ## Releases and changelog
 
