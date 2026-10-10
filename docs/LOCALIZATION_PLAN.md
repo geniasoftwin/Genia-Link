@@ -2,7 +2,9 @@
 
 _Last updated: 2026-10-10_
 
-**Status: PLANNED.** These are agreed product requirements, not features currently claimed to be shipped.
+**Status: APPROVED AS M2.10 (2026-10-10) — implementation not yet validated.** These are agreed product requirements, not features currently claimed to be shipped. M2.9.3 remains the Scan Job Management milestone.
+
+Implementation kickoff and detailed regression boundary: [GNP/1 M2.10 Unified UI & Localization](GNP1_M2_10_UNIFIED_UI_LOCALIZATION.md).
 
 ## Initial languages
 
@@ -38,10 +40,11 @@ One coherent design system for both Windows and Android, adapted to native platf
 
 ## Planned order
 
-1. Complete and freeze the current print settings/lifecycle checkpoint after its outstanding verification.
-2. Implement M2.9.1 scanner foundation; proceed through remote scan MVP.
-3. Introduce resource catalogs, explicit `auto/ru/en` preference and terminology keys.
-4. Apply a unified design system incrementally to Windows and Android, with regression tests for long labels and small layouts.
+1. Preserve the physically tested M2.9.2 Remote Scan baseline (Windows build7, Android build8) while developing separately.
+2. Introduce resource catalogs, explicit `auto/ru/en` preference and terminology keys, with persistence tests.
+3. Apply a unified design system incrementally to Windows and Android, starting with device lists, main actions and settings.
+4. Localize transfer/history, pairing, print, scan, dialogs and notifications; regress the working M2.9.2 path.
+5. Verify long labels, accessibility, security/build checks and real devices before calling the milestone physically validated.
 
 ## Acceptance checklist
 
