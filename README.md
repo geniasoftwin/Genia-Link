@@ -10,22 +10,40 @@
   <a href="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml"><img src="https://github.com/geniasoftwin/Genia-Link/actions/workflows/ci.yml/badge.svg?branch=main" alt="Genia Link CI" /></a>
 </p>
 
-Genia Link is a local-first device link for trusted file exchange between Windows and Android devices. The current public source snapshot is **v0.3.1 RC4 / GNP/1 M2.6.2 Authenticated Capabilities**.
+<p align="center"><strong>Your Devices. One Connected Ecosystem.</strong></p>
 
-## Repository status at a glance
+## What is Genia Link?
 
-| Item | Status |
-| --- | --- |
-| Public source currently on `main` | **v0.3.1 RC4 / GNP/1 M2.6.2** |
-| Latest physically validated development checkpoint | **GNP/1 M2.9.2 Remote Scan build8** (Windows gateway build7 + Android build8) |
-| Network model | Local-first; custom UDP discovery + authenticated trusted transport |
-| License | **Source-available, All Rights Reserved; not open-source** |
+**Genia Link is a local-first platform for connecting trusted devices and accessing their network services, powered by GNP/1.** It brings Windows and Android devices together for secure file exchange and, in physically tested development builds, remote printing and scanning through another trusted device on the same local network.
 
-The newer M2.7/M2.8 checkpoints are documented publicly, but the full corresponding source tree has not yet been synchronized to `main`. This distinction is intentional so the repository never presents a partially replaced development tree as a complete checkpoint.
+**Discover → pair → authenticate → use verified capabilities.** File transfer is part of the public source; printing and scanning have been tested on real hardware but their newer source code has **not** been published in this repository yet.
 
-> **Development status:** release-candidate / protocol-development checkpoint. Interfaces, packaging, and GNP/1 details may change before a stable release.
+## Features and availability
 
-## Product flow
+| Feature | Status | Validated version |
+| --- | --- | --- |
+| Windows ↔ Android discovery, SAS pairing, trusted identities and capabilities | **PUBLIC SOURCE** | M2.6.2 |
+| Encrypted file transfer with integrity checking and resume | **PUBLIC SOURCE** | M2.6.2 |
+| Remote printing via Windows PrinterGateway | **PHYSICAL PASS · DEV BUILD** | M2.8; Samsung SCX-4300 baseline |
+| One-page remote scanning via Windows ScannerGateway → Android JPEG | **PHYSICAL PASS · DEV BUILD** | M2.9.2; Windows build7, two Android build8 clients |
+| Automatic scan queue, manual screen-lock/background scan, ADF/multipage/PDF | **NOT VALIDATED** | Future work, not in public source |
+
+**PUBLIC SOURCE** = currently available source code on `main`. **PHYSICAL PASS** = a specific scenario tested on real devices in a separate development build, not a downloadable release. See the [Validation Matrix](docs/VALIDATION_MATRIX.md) and [Development Status](docs/DEVELOPMENT_STATUS.md).
+
+## Download and quick start
+
+- **Public source release:** [v0.3.1 RC4 / GNP/1 M2.6.2](https://github.com/geniasoftwin/Genia-Link/releases/tag/v0.3.1-rc4-m2.6.2) — a **source checkpoint only**, with no attached EXE or APK installers.
+- **Build it:** requires **.NET 10** and the appropriate Windows Desktop / .NET for Android toolchains. See [build prerequisites](#build-prerequisites), the `scripts/` folder, and the [RC4 checklist](docs/RC4_FINAL_TEST.md).
+- **Connect:** launch the two clients on the same local network, discover the peer, compare and confirm the pairing code on both devices, then transfer files. See [User Flow](docs/USER_FLOW.md).
+- **Printing and scanning:** the tested development Windows gateway relies on locally installed printer/scanner drivers. These newer builds are **not included in the public M2.6.2 release**.
+
+This repository is **source-available, All Rights Reserved**, not open-source licensed; see [LICENSE](LICENSE).
+
+## Screenshots and demo
+
+Real Windows and Android screenshots, plus a physical print/scan demo, will be added after checking for private documents, device identifiers and network details. The illustration below is clearly **concept UI**, not a screenshot of a shipped build.
+
+## Product flow — concept illustration
 
 > **Concept UI:** the visual below shows the intended information hierarchy and user journey. It is **not a screenshot of the current build**. Implementation/validation status is documented separately so concept visuals are never presented as shipped behavior.
 
@@ -33,7 +51,7 @@ The newer M2.7/M2.8 checkpoints are documented publicly, but the full correspond
   <img src="branding/web/print-flow-concept.svg" alt="Genia Link concept UI: local discovery, SAS pairing, authenticated capabilities, trusted printing and fail-closed Cancel / Retry" width="100%" />
 </p>
 
-**Discover → Pair with SAS → authenticate the trusted device → use verified capabilities → transfer/print → explicit Cancel / Retry.**
+**Discover → pair with SAS → authenticate the trusted device → see verified capabilities → transfer files or, in tested development builds, print and scan remotely.**
 
 See the [User Flow](docs/USER_FLOW.md) for the step-by-step explanation and the [Validation & Compatibility Matrix](docs/VALIDATION_MATRIX.md) for a clear distinction between **PUBLIC**, **PHYSICAL PASS**, **IMPLEMENTED / NOT PHYSICALLY VALIDATED**, and **PLANNED** behavior.
 
