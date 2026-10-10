@@ -32,8 +32,11 @@ The active development line has advanced beyond the public M2.6.2 snapshot.
 | GNP/1 M2.8.5.2 | Functional UI observed in dev | Read-only detailed printer capability profile displayed in Android |
 | GNP/1 M2.8.5.3 | Partial physical validation in dev | Actual copies and DPI changes verified on SCX-4300; paper-format test and final security/build confirmation remain outstanding |
 | GNP/1 M2.9.2 build8 Remote Scan | **PHYSICAL PASS (2026-10-10)** | Two trusted Android build8 clients → Windows ScannerGateway build7: single-page 300 dpi WIA to verified JPEG; exclusive scanner access, Android `Busy` UX; screen stays on during active scanning at 15/30 s timeouts. No claim of full M2.9.2 security/build PASS |
+| GNP/1 M2.10 Unified UI & Localization | **APPROVED / PLANNED; NOT IMPLEMENTED** | RU/EN/Auto preference, consistent Windows/Android UI, local resource keys and state-preserving language selection; build/security and physical validation pending |
 
 Detailed M2.8.4.5 checkpoint: [Cancel / Retry](GNP1_MILESTONE2_8_4_5_CANCEL_RETRY.md).
+
+M2.10 presentation-layer kickoff: [Unified UI & Localization](GNP1_M2_10_UNIFIED_UI_LOCALIZATION.md). It is a development plan only, not a shipped feature. M2.9.3 remains reserved for Scan Job Management.
 
 Detailed M2.9.2 physical checkpoint: [Remote Scan / Android Scan Stability build8](GNP1_M2_9_2_REMOTE_SCAN_BUILD8.md). The tested Windows gateway remains build7; the Android clients were updated to build8. Manual screen lock, background operation, auto-queueing, scan cancellation, and multipage/ADF/PDF scanning are not validated by this checkpoint.
 
@@ -62,12 +65,12 @@ Physical tests covered repeated Cancel → Retry → Cancel cycles on DOCX, PDF 
 1. Finish the outstanding M2.8.5.3 print settings checks and freeze the actual selected source package (do not infer full security PASS from UI screenshots).
 2. Maintain the physically tested M2.9.2 single-page remote-scan baseline; separately test manual screen lock/background execution, transport loss, recovery and targeted cancellation.
 3. Plan M2.9.3 scanner-job management (optional explicit user-confirmed queue, device-scoped result ownership, bounded retry); only then broaden multipage / ADF / PDF support where observed.
-4. Add [Russian/English localization](LOCALIZATION_PLAN.md) with system-default selection, persistent manual override and a unified Windows/Android design system.
+4. Implement the approved [M2.10 Unified UI & Localization plan](GNP1_M2_10_UNIFIED_UI_LOCALIZATION.md) in separate development sources, starting with the [Russian/English localization foundation](LOCALIZATION_PLAN.md); do not confuse design approval with implementation.
 5. Broaden compatibility tests and prepare a deliberate public source synchronization beyond M2.6.2 only after packaging and revalidating a complete development checkpoint.
 
 ## Roadmap boundary
 
-**M2.9.2 single-page Remote Scan** is physically validated only for the tested development configuration described above. Unvalidated scanner extensions, localization, peer-assisted reachability and related future capabilities remain **PLANNED** unless separately implemented and tested. None of M2.9.2 is included in the public M2.6.2 source snapshot.
+**M2.9.2 single-page Remote Scan** is physically validated only for the tested development configuration described above. **M2.10 localization/UI has been approved for implementation but remains unimplemented and unvalidated.** Unvalidated scanner extensions, peer-assisted reachability and related future capabilities remain **PLANNED** unless separately implemented and tested. None of M2.9.2 is included in the public M2.6.2 source snapshot.
 
 The scanner plan explicitly requires a locally installed WIA-compatible scanner driver on the Windows gateway where appropriate, but no Microsoft Office or Genia Link cloud service.
 
